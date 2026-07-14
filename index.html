@@ -2,28 +2,49 @@
 <html>
 <head>
     <title>Dollar Clicker</title>
+
     <style>
         body {
             margin: 0;
             height: 100vh;
+            background: #222;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: Arial, sans-serif;
-            background: white;
+            font-family: monospace;
+            image-rendering: pixelated;
         }
 
         #money {
             position: absolute;
             top: 10px;
             left: 10px;
-            font-size: 24px;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 3px 3px #000;
         }
 
         #dollar {
-            font-size: 150px;
+            width: 180px;
+            height: 90px;
+            background: #3cb043;
+            border: 8px solid #145214;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 70px;
+            font-weight: bold;
             cursor: pointer;
             user-select: none;
+            box-shadow: 8px 8px #000;
+            image-rendering: pixelated;
+        }
+
+        #dollar:active {
+            transform: translate(4px, 4px);
+            box-shadow: 4px 4px #000;
         }
     </style>
 </head>
@@ -32,7 +53,7 @@
 
     <div id="money">Money: $0</div>
 
-    <div id="dollar">💵</div>
+    <div id="dollar">$</div>
 
     <script>
         let money = 0;
