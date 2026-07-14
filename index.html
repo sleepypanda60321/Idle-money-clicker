@@ -199,7 +199,31 @@ function loadGame(){
 
 }
 
+document.addEventListener("visibilitychange", function() {
 
+    if (document.visibilityState === "visible") {
+
+        let lastTime = Number(localStorage.getItem("lastTime"));
+
+        if (lastTime) {
+
+            let secondsAway = Math.floor((Date.now() - lastTime) / 1000);
+
+            let earned = secondsAway * income;
+
+            if (earned > 0) {
+
+                money += earned;
+
+                updateDisplay();
+
+                showOfflinePopup(earned);
+
+            }
+        }
+    }
+
+});
 
 
 document.getElementById("dollar").onclick = function(){
