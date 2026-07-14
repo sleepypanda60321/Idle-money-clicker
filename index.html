@@ -58,7 +58,7 @@
 <button class="tab">Tab 2</button>
 <button class="tab" id="shopTab">Shop</button>
 <button class="tab">Tab 4</button>
-<button class="tab">Tab 5</button>
+<button class="tab">Settings</button>
 
 </div>
 
@@ -86,6 +86,21 @@
 
 </div>
 
+<div id="settings">
+
+<h2>⚙️ SETTINGS</h2>
+
+<button id="saveButton">
+💾 Save Game
+</button>
+
+<br><br>
+
+<button id="deleteButton">
+Delete All Progress
+</button>
+
+</div>
 
 <div id="offlinePopup">
 
@@ -262,6 +277,30 @@ function showOfflinePopup(amount){
         popup.style.display = "none";
     };
 }
+
+<div id="deletePopup">
+
+<div id="offlineBox">
+
+<button id="closeDelete">✕</button>
+
+<h2>Are you sure?</h2>
+
+<p>
+Would you like to delete all your progress?
+</p>
+
+<button id="cancelDelete">
+Cancel
+</button>
+
+<button id="confirmDelete">
+Delete
+</button>
+
+</div>
+
+</div>
 
 loadGame();
 
