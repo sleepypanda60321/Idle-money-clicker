@@ -6,33 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
     <style>
-        body {
+        html, body {
             margin: 0;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
             background: #222;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-family: monospace;
             image-rendering: pixelated;
             touch-action: manipulation;
         }
 
         #money {
-            position: absolute;
-            top: -10px;
-            left: 10px;
+            height: 10px;
+            margin-top: 10px;
+            margin-left: 10px;
             color: white;
             font-size: 45px;
             font-weight: bold;
-            line-height: 1;
             text-shadow: 4px 4px #000;
         }
 
         #income {
-            position: absolute;
-            top: 50px;
-            left: 10px;
+            margin-top: 35px;
+            margin-left: 10px;
             color: white;
             font-size: 25px;
             font-weight: bold;
@@ -40,21 +37,26 @@
         }
 
         #dollar {
+            margin: 30px auto 0 auto;
+
             width: 180px;
-            height: 90px;
+            height: 100px;
+
             background: #3cb043;
             border: 8px solid #145214;
+
             display: flex;
             justify-content: center;
             align-items: center;
+
             color: white;
             font-size: 70px;
             font-weight: bold;
+
+            box-shadow: 8px 8px #000;
+
             cursor: pointer;
             user-select: none;
-            box-shadow: 8px 8px #000;
-            image-rendering: pixelated;
-            touch-action: manipulation;
         }
     </style>
 </head>
@@ -62,9 +64,11 @@
 <body>
 
     <div id="money">Money: $0</div>
-    <div id="income">+$0/sec</div>
+
+    <div id="income">+$0 / sec</div>
 
     <div id="dollar">$</div>
+
 
     <script>
         let money = 0;
@@ -74,6 +78,7 @@
 
         dollar.addEventListener("click", function() {
             money++;
+
             moneyDisplay.textContent = "Money: $" + money;
         });
     </script>
