@@ -89,7 +89,20 @@
 
 
 
+const shopTab = document.getElementById("shopTab");
+const shop = document.getElementById("shop");
 
+function openShop() {
+    shop.style.display = "block";
+}
+
+shopTab.onclick = function() {
+    openShop();
+};
+
+// Open Shop automatically on startup
+openShop();
+    
 <script>
 
 let money = 0;
