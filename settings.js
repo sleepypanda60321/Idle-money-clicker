@@ -1,5 +1,6 @@
 const settingsTab = document.getElementById("settingsTab");
 const settings = document.getElementById("settings");
+const shop = document.getElementById("shop");
 
 const saveButton = document.getElementById("saveButton");
 
