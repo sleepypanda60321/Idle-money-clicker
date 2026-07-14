@@ -224,7 +224,20 @@ setInterval(function(){
 
 },1000);
 
+function showOfflinePopup(amount){
 
+    const popup = document.getElementById("offlinePopup");
+    const text = document.getElementById("offlineText");
+    const close = document.getElementById("closeOffline");
+
+    text.textContent = "While you were away, you earned $" + amount;
+
+    popup.style.display = "flex";
+
+    close.onclick = function(){
+        popup.style.display = "none";
+    };
+}
 
 loadGame();
 
