@@ -16,14 +16,6 @@ const confirmDelete = document.getElementById("confirmDelete");
 
 
 
-settingsTab.onclick = function(){
-
-    shop.style.display = "none";
-
-    settings.style.display = "block";
-
-};
-
 
 
 saveButton.onclick = function(){
