@@ -337,7 +337,7 @@ function showOfflinePopup(amount){
     const text = document.getElementById("offlineText");
     const close = document.getElementById("closeOffline");
 
-    text.textContent = "While you were away, you earned $" + amount;
+    text.textContent = "While you were away, you earned $" + formatMoney(amount);
 
     popup.style.display = "flex";
 
