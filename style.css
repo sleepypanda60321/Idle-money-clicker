@@ -19,6 +19,16 @@ html, body {
 }
 
 
+#moneyLabel {
+    font-size: 48px;
+}
+
+#moneyValue {
+    font-size: 48px;
+    transition: font-size 0.2s;
+}
+
+
 #stats {
     display: flex;
     align-items: center;
