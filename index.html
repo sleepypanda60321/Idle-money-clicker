@@ -143,16 +143,24 @@ Delete
     
 <script>
 
-    const shopTab = document.getElementById("shopTab");
+const shopTab = document.getElementById("shopTab");
+const settingsTab = document.getElementById("settingsTab");
+
 const shop = document.getElementById("shop");
+const settings = document.getElementById("settings");
 
 function openShop() {
     shop.style.display = "block";
+    settings.style.display = "none";
 }
 
-shopTab.onclick = function() {
-    openShop();
-};
+function openSettings() {
+    shop.style.display = "none";
+    settings.style.display = "block";
+}
+
+shopTab.onclick = openShop;
+settingsTab.onclick = openSettings;
 
 // Open Shop automatically on startup
 openShop();
