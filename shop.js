@@ -11,7 +11,7 @@ function updateShop() {
     let cost = getPrinterCost();
 
     printer.textContent =
-        "🖨️ Printer - $" + cost + " (+$1/sec)";
+    "Printer - $" + formatMoney(cost) + " (+$1/sec)";
 }
 
 
