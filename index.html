@@ -175,12 +175,33 @@ let printers = 0;
 const moneyValue = document.getElementById("moneyValue");
 const incomeDisplay = document.getElementById("income");
 
+function formatMoney(num) {
 
+    if (num < 10000) {
+        return Math.floor(num).toString();
+    }
+
+    const units = [
+        "K", "M", "B", "T",
+        "Qa", "Qi", "Sx", "Sp",
+        "Oc", "No", "Dc"
+    ];
+
+    let unit = -1;
+
+    while (num >= 1000 && unit < units.length - 1) {
+        num /= 1000;
+        unit++;
+    }
+
+    return num.toFixed(1).replace(".0", "") + units[unit];
+
+}
 
 
 function updateDisplay(){
 
-moneyValue.textContent = "$" + Math.floor(money);
+moneyValue.textContent = "$" + formatMoney(money);
 
 let digits = Math.floor(money).toString().length;
 
@@ -196,7 +217,7 @@ if (digits < 7) {
 
 
     incomeDisplay.textContent =
-    "+$" + income + " / sec";
+    "+$" + formatMoney(income) + " / sec";
 
 }
 
