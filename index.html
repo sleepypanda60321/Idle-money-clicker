@@ -177,8 +177,11 @@ const incomeDisplay = document.getElementById("income");
 
 function formatMoney(num) {
 
+    num = Math.floor(num);
+
+    // Under 10,000: show commas
     if (num < 10000) {
-        return Math.floor(num).toString();
+        return num.toLocaleString();
     }
 
     const units = [
@@ -197,6 +200,7 @@ function formatMoney(num) {
     return num.toFixed(1).replace(".0", "") + units[unit];
 
 }
+
 
 
 function updateDisplay(){
