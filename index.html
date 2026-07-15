@@ -180,8 +180,19 @@ const incomeDisplay = document.getElementById("income");
 
 function updateDisplay(){
 
-    moneyDisplay.textContent =
-    "Money: $" + Math.floor(money);
+moneyValue.textContent = "$" + Math.floor(money);
+
+let digits = Math.floor(money).toString().length;
+
+if (digits < 7) {
+    moneyValue.style.fontSize = "48px";
+} else if (digits < 10) {
+    moneyValue.style.fontSize = "40px";
+} else if (digits < 13) {
+    moneyValue.style.fontSize = "32px";
+} else {
+    moneyValue.style.fontSize = "26px";
+}
 
 
     incomeDisplay.textContent =
