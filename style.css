@@ -274,3 +274,61 @@ html, body {
     z-index: 20;
 
 }
+
+
+/* Auto Clicker Button */
+
+#autoClickerButton {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+    border: 3px solid black;
+
+    background: white;
+
+    font-size: 24px;
+
+    z-index: 200;
+}
+
+
+/* Auto Clicker Panel */
+
+#autoClickerPanel {
+    display: none;
+
+    position: fixed;
+
+    left: 20px;
+    bottom: 85px;
+
+    width: 220px;
+
+    padding: 15px;
+
+    background: white;
+    border: 3px solid black;
+
+    z-index: 201;
+
+    text-align: center;
+}
+
+#autoClickerPanel h3 {
+    margin-top: 0;
+}
+
+#autoClickerPanel button {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 10px;
+}
