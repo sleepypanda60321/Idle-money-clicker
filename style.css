@@ -462,3 +462,12 @@ html, body {
     position: relative;
     z-index: 101;
 }
+
+
+#backpack {
+    background: red !important;
+    position: fixed !important;
+    top: 65px !important;
+    left: 10px !important;
+    z-index: 999999 !important;
+}
