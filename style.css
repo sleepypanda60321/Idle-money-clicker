@@ -393,3 +393,21 @@ html, body {
 
     transform: scaleX(1);
 }
+
+
+#deletePopup #cancelDelete,
+#deletePopup #confirmDelete {
+    display: inline-block;
+    width: 40%;
+    height: 55px;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+#deletePopup #cancelDelete {
+    margin-right: 5%;
+}
+
+#deletePopup #confirmDelete {
+    color: red;
+}
