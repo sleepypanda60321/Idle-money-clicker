@@ -17,13 +17,123 @@ const stopAutoClicker =
 const autoClickerStatus =
     document.getElementById("autoClickerStatus");
 
+const autoSpeedSlider =
+    document.getElementById("autoSpeedSlider");
+
+const autoSpeedInput =
+    document.getElementById("autoSpeedInput");
+
+const autoSpeedText =
+    document.getElementById("autoSpeedText");
+
 
 let autoClickerTarget = null;
-let autoClickerInterval = null;
+let autoClickerTimer = null;
 let selectingAutoTarget = false;
 
+let autoClickerSpeed = 10;
 
-// Open / close panel
+
+// ===============================
+// SPEED
+// ===============================
+
+function sliderToSpeed(value) {
+
+    const min = Math.log10(0.1);
+    const max = Math.log10(100);
+
+    const position = Number(value) / 100;
+
+    return Math.pow(
+        10,
+        min + (max - min) * position
+    );
+
+}
+
+
+function updateSpeedDisplay() {
+
+    let speed = autoClickerSpeed;
+
+    if (speed >= 100) {
+
+        autoSpeedText.textContent =
+            Math.round(speed) + " clicks/sec";
+
+    } else if (speed >= 1) {
+
+        autoSpeedText.textContent =
+            speed.toFixed(1).replace(".0", "") +
+            " clicks/sec";
+
+    } else {
+
+        const seconds = 1 / speed;
+
+        autoSpeedText.textContent =
+            "1 click every " +
+            seconds.toFixed(1).replace(".0", "") +
+            " seconds";
+
+    }
+
+}
+
+
+// ===============================
+// SLIDER
+// ===============================
+
+autoSpeedSlider.oninput = function () {
+
+    autoClickerSpeed =
+        sliderToSpeed(this.value);
+
+    autoSpeedInput.value =
+        Number(autoClickerSpeed.toFixed(2));
+
+    updateSpeedDisplay();
+
+    if (autoClickerTarget) {
+        startAutoClicker();
+    }
+
+};
+
+
+// ===============================
+// TEXT INPUT
+// ===============================
+
+autoSpeedInput.onchange = function () {
+
+    let speed = Number(this.value);
+
+    if (!Number.isFinite(speed)) {
+        speed = 10;
+    }
+
+    speed = Math.max(0.1, Math.min(100, speed));
+
+    autoClickerSpeed = speed;
+
+    this.value = speed;
+
+    updateSpeedDisplay();
+
+    if (autoClickerTarget) {
+        startAutoClicker();
+    }
+
+};
+
+
+// ===============================
+// OPEN / CLOSE PANEL
+// ===============================
+
 autoClickerButton.onclick = function () {
 
     if (autoClickerPanel.classList.contains("open")) {
@@ -39,7 +149,10 @@ autoClickerButton.onclick = function () {
 };
 
 
-// Select a target
+// ===============================
+// SELECT TARGET
+// ===============================
+
 selectAutoTarget.onclick = function () {
 
     selectingAutoTarget = true;
@@ -52,7 +165,10 @@ selectAutoTarget.onclick = function () {
 };
 
 
-// Detect selected button
+// ===============================
+// TARGET DETECTION
+// ===============================
+
 document.addEventListener("click", function (event) {
 
     if (!selectingAutoTarget) {
@@ -60,7 +176,6 @@ document.addEventListener("click", function (event) {
     }
 
 
-    // Don't select the Auto Clicker controls
     if (
         event.target === autoClickerButton ||
         autoClickerPanel.contains(event.target)
@@ -72,7 +187,6 @@ document.addEventListener("click", function (event) {
     const target = event.target;
 
 
-    // Only select things that can actually be activated
     if (typeof target.click !== "function") {
 
         selectingAutoTarget = false;
@@ -101,7 +215,10 @@ document.addEventListener("click", function (event) {
 }, true);
 
 
-// Start auto clicking
+// ===============================
+// AUTO CLICKING
+// ===============================
+
 function startAutoClicker() {
 
     stopAutoClickerFunction();
@@ -112,37 +229,48 @@ function startAutoClicker() {
     }
 
 
-    autoClickerInterval = setInterval(function () {
+    function clickLoop() {
 
-        if (
-            autoClickerTarget &&
-            typeof autoClickerTarget.click === "function"
-        ) {
-
-            autoClickerTarget.click();
-
+        if (!autoClickerTarget) {
+            return;
         }
 
-    }, 100);
+
+        autoClickerTarget.click();
+
+
+        const delay =
+            1000 / autoClickerSpeed;
+
+
+        autoClickerTimer =
+            setTimeout(clickLoop, delay);
+
+    }
+
+
+    clickLoop();
 
 }
 
 
-// Stop auto clicking
+// ===============================
+// STOP
+// ===============================
+
 function stopAutoClickerFunction() {
 
-    if (autoClickerInterval !== null) {
+    if (autoClickerTimer !== null) {
 
-        clearInterval(autoClickerInterval);
+        clearTimeout(autoClickerTimer);
 
-        autoClickerInterval = null;
+        autoClickerTimer = null;
 
     }
 
 }
 
 
-// Stop button
 stopAutoClicker.onclick = function () {
 
     stopAutoClickerFunction();
@@ -151,3 +279,14 @@ stopAutoClicker.onclick = function () {
         "Auto clicker stopped.";
 
 };
+
+
+// ===============================
+// INITIAL SETTINGS
+// ===============================
+
+autoSpeedSlider.value = 50;
+
+autoSpeedInput.value = 10;
+
+updateSpeedDisplay();
