@@ -425,6 +425,38 @@ saveButton.onclick = function(){
     }, 2000);
 
 };
+
+const deleteButton = document.getElementById("deleteButton");
+const deletePopup = document.getElementById("deletePopup");
+const closeDelete = document.getElementById("closeDelete");
+const cancelDelete = document.getElementById("cancelDelete");
+const confirmDelete = document.getElementById("confirmDelete");
+
+deleteButton.onclick = function(){
+
+    deletePopup.style.display = "flex";
+
+};
+
+closeDelete.onclick = function(){
+
+    deletePopup.style.display = "none";
+
+};
+
+cancelDelete.onclick = function(){
+
+    deletePopup.style.display = "none";
+
+};
+
+confirmDelete.onclick = function(){
+
+    localStorage.clear();
+
+    location.reload();
+
+};
     
 function showOfflinePopup(amount){
 
