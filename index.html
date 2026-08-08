@@ -303,7 +303,10 @@ function saveGame(){
 
     localStorage.setItem("money", money);
     localStorage.setItem("income", income);
-    localStorage.setItem("printers", printers);
+    localStorage.setItem(
+    "printerOwned",
+    items.printer.owned
+);
     localStorage.setItem("lastTime", Date.now());
 
 }
@@ -319,8 +322,8 @@ function loadGame(){
     Number(localStorage.getItem("income")) || 0;
 
 
-    printers =
-    Number(localStorage.getItem("printers")) || 0;
+    items.printer.owned =
+Number(localStorage.getItem("printerOwned")) || 0;
 
 
 
