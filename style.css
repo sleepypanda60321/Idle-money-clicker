@@ -428,12 +428,19 @@ html, body {
     box-sizing: border-box;
 
 }
-#stats {
+/* Force the stats/backpack above the money */
+
+#money {
     position: relative;
-    z-index: 100;
+    z-index: 1;
+}
+
+#stats {
+    position: relative !important;
+    z-index: 9999 !important;
 }
 
 #backpack {
-    position: relative;
-    z-index: 101;
+    position: relative !important;
+    z-index: 10000 !important;
 }
