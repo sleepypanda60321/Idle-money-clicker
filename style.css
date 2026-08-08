@@ -277,13 +277,13 @@ html, body {
 
 
 /* =========================
-   AUTO CLICKER
+   AUTO CLICKER BUTTON
    ========================= */
 
 #autoClickerButton {
+
     position: fixed;
 
-    /* Put this directly across from the backpack */
     right: 20px;
     top: 55px;
 
@@ -305,54 +305,36 @@ html, body {
 }
 
 
-/* Pixel-art cursor */
+/* Pixel cursor */
 
 .pixelCursor {
+
     position: relative;
 
-    width: 0;
-    height: 0;
-
-    border-top: 22px solid black;
-    border-right: 14px solid transparent;
-    border-bottom: 0 solid transparent;
-    border-left: 0 solid transparent;
-
-    transform: rotate(-10deg);
-}
-
-.pixelCursor::before {
-    content: "";
-
-    position: absolute;
-
-    left: 4px;
-    top: -17px;
-
-    width: 7px;
-    height: 22px;
-
-    background: white;
-}
-
-.pixelCursor::after {
-    content: "";
-
-    position: absolute;
-
-    left: 8px;
-    top: -3px;
-
-    width: 9px;
-    height: 7px;
+    width: 20px;
+    height: 28px;
 
     background: black;
+
+    clip-path: polygon(
+        0 0,
+        100% 70%,
+        65% 70%,
+        85% 100%,
+        65% 100%,
+        45% 72%,
+        0 100%
+    );
+
 }
 
 
-/* Auto Clicker window */
+/* =========================
+   AUTO CLICKER PANEL
+   ========================= */
 
 #autoClickerPanel {
+
     display: none !important;
 
     position: fixed;
@@ -374,13 +356,15 @@ html, body {
 }
 
 
-/* JavaScript adds this when the panel should be visible */
-
 #autoClickerPanel.open {
+
     display: block !important;
+
 }
 
+
 #autoClickerPanel button {
+
     display: block;
 
     width: 100%;
@@ -388,4 +372,38 @@ html, body {
     margin-top: 10px;
 
     padding: 10px;
+
+}
+
+
+/* =========================
+   SPEED CONTROLS
+   ========================= */
+
+#autoClickerPanel input[type="range"] {
+
+    width: 100%;
+
+    margin: 10px 0;
+
+}
+
+
+#autoSpeedInput {
+
+    width: 80px;
+
+    padding: 6px;
+
+    font-size: 16px;
+
+}
+
+
+#autoSpeedText {
+
+    margin: 8px 0 0 0;
+
+    font-size: 14px;
+
 }
