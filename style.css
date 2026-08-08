@@ -276,96 +276,116 @@ html, body {
 }
 
 
-/* Auto Clicker Button */
-
-#autoClickerButton {
-    position: fixed;
-    left: 20px;
-    bottom: 20px;
-
-    width: 55px;
-    height: 55px;
-
-    border-radius: 50%;
-    border: 3px solid black;
-
-    background: white;
-
-    font-size: 24px;
-
-    z-index: 200;
-}
-
+/* =========================
+   AUTO CLICKER
+   ========================= */
 
 #autoClickerButton {
     position: fixed;
 
+    /* Put this directly across from the backpack */
+    right: 20px;
+    top: 55px;
+
     width: 55px;
     height: 55px;
-
-    border-radius: 50%;
-    border: 3px solid black;
-
-    background: white;
 
     padding: 0;
 
-    z-index: 200;
+    border: 3px solid black;
+    border-radius: 50%;
+
+    background: white;
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    z-index: 50;
 }
 
 
-/* Pixel-art pointing finger */
+/* Pixel-art cursor */
 
-.pixelFinger {
+.pixelCursor {
     position: relative;
 
-    width: 8px;
-    height: 28px;
+    width: 0;
+    height: 0;
+
+    border-top: 22px solid black;
+    border-right: 14px solid transparent;
+    border-bottom: 0 solid transparent;
+    border-left: 0 solid transparent;
+
+    transform: rotate(-10deg);
+}
+
+.pixelCursor::before {
+    content: "";
+
+    position: absolute;
+
+    left: 4px;
+    top: -17px;
+
+    width: 7px;
+    height: 22px;
+
+    background: white;
+}
+
+.pixelCursor::after {
+    content: "";
+
+    position: absolute;
+
+    left: 8px;
+    top: -3px;
+
+    width: 9px;
+    height: 7px;
 
     background: black;
+}
 
+
+/* Auto Clicker window */
+
+#autoClickerPanel {
+    display: none !important;
+
+    position: fixed;
+
+    right: 20px;
+    top: 120px;
+
+    width: 220px;
+
+    padding: 15px;
+
+    background: white;
+
+    border: 3px solid black;
+
+    text-align: center;
+
+    z-index: 51;
+}
+
+
+/* JavaScript adds this when the panel should be visible */
+
+#autoClickerPanel.open {
+    display: block !important;
+}
+
+#autoClickerPanel button {
     display: block;
-}
 
+    width: 100%;
 
-/* Finger and hand pixels */
+    margin-top: 10px;
 
-.pixelFinger::before {
-    content: "";
-
-    position: absolute;
-
-    left: -8px;
-    top: 10px;
-
-    width: 24px;
-    height: 16px;
-
-    background: black;
-
-    box-shadow:
-        -8px 4px black,
-        8px 8px black,
-        0 16px black;
-}
-
-
-/* Pixel-art outline / tip */
-
-.pixelFinger::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: -8px;
-
-    width: 8px;
-    height: 8px;
-
-    background: black;
+    padding: 10px;
 }
