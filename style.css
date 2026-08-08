@@ -428,3 +428,12 @@ html, body {
     box-sizing: border-box;
 
 }
+#stats {
+    position: relative;
+    z-index: 100;
+}
+
+#backpack {
+    position: relative;
+    z-index: 101;
+}
