@@ -411,3 +411,20 @@ html, body {
 #deletePopup #confirmDelete {
     color: red;
 }
+
+
+
+#deleteButtons {
+    display: flex;
+    gap: 15px;
+}
+
+#deleteButtons button {
+    flex: 1;
+    width: auto;
+    margin: 0;
+}
+
+#deleteButtons #confirmDelete {
+    color: red;
+}
