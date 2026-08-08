@@ -306,3 +306,48 @@ html, body {
     text-align: center;
     box-sizing: border-box;
 }
+
+
+#saveMessage {
+    display: none;
+
+    margin-top: 8px;
+
+    color: #00ff00;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    text-shadow: 2px 2px #000;
+
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pixelCheck {
+    position: relative;
+
+    width: 16px;
+    height: 16px;
+
+    display: inline-block;
+}
+
+/* Pixel-art checkmark */
+.pixelCheck::before {
+    content: "";
+
+    position: absolute;
+
+    width: 5px;
+    height: 10px;
+
+    border-right: 4px solid #00ff00;
+    border-bottom: 4px solid #00ff00;
+
+    transform: rotate(45deg);
+
+    left: 4px;
+    top: 1px;
+}
