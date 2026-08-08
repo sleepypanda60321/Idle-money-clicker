@@ -405,6 +405,25 @@ saveButton.onclick = function(){
     }, 2000);
 
 };
+
+const saveButton = document.getElementById("saveButton");
+
+saveButton.onclick = function(){
+
+    saveGame();
+
+    const saveMessage =
+        document.getElementById("saveMessage");
+
+    saveMessage.style.display = "flex";
+
+    setTimeout(function(){
+
+        saveMessage.style.display = "none";
+
+    }, 2000);
+
+};
     
 function showOfflinePopup(amount){
 
