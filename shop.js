@@ -2,7 +2,10 @@ const printer = document.getElementById("printer");
 
 
 function getPrinterCost() {
-    return 50 + (printers * 5);
+
+    return items.printer.price +
+           (items.printer.owned * 5);
+
 }
 
 
@@ -11,9 +14,9 @@ function updateShop() {
     let cost = getPrinterCost();
 
     printer.textContent =
-    "Printer - $" + formatMoney(cost) + " (+$1/sec)";
-}
+        "Printer - $" + formatMoney(cost) + " (+$1/sec)";
 
+}
 
 
 printer.onclick = function() {
@@ -25,9 +28,9 @@ printer.onclick = function() {
 
         money -= cost;
 
-        income += 1;
+        items.printer.owned++;
 
-        printers++;
+        income += items.printer.income;
 
 
         updateDisplay();
@@ -39,7 +42,6 @@ printer.onclick = function() {
     }
 
 };
-
 
 
 updateShop();
