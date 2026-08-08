@@ -1,292 +1,205 @@
-// ===============================
-// AUTO CLICKER
-// ===============================
+document.addEventListener("DOMContentLoaded", function () {
 
-const autoClickerButton =
-    document.getElementById("autoClickerButton");
+    const autoClickerButton =
+        document.getElementById("autoClickerButton");
 
-const autoClickerPanel =
-    document.getElementById("autoClickerPanel");
+    const autoClickerPanel =
+        document.getElementById("autoClickerPanel");
 
-const selectAutoTarget =
-    document.getElementById("selectAutoTarget");
+    const selectAutoTarget =
+        document.getElementById("selectAutoTarget");
 
-const stopAutoClicker =
-    document.getElementById("stopAutoClicker");
+    const stopAutoClicker =
+        document.getElementById("stopAutoClicker");
 
-const autoClickerStatus =
-    document.getElementById("autoClickerStatus");
+    const autoClickerStatus =
+        document.getElementById("autoClickerStatus");
 
-const autoSpeedSlider =
-    document.getElementById("autoSpeedSlider");
-
-const autoSpeedInput =
-    document.getElementById("autoSpeedInput");
-
-const autoSpeedText =
-    document.getElementById("autoSpeedText");
+    const autoSpeedInput =
+        document.getElementById("autoSpeedInput");
 
 
-let autoClickerTarget = null;
-let autoClickerTimer = null;
-let selectingAutoTarget = false;
+    let autoClickerTarget = null;
+    let autoClickerTimer = null;
+    let selectingAutoTarget = false;
 
-let autoClickerSpeed = 10;
-
-
-// ===============================
-// SPEED
-// ===============================
-
-function sliderToSpeed(value) {
-
-    const min = Math.log10(0.1);
-    const max = Math.log10(100);
-
-    const position = Number(value) / 100;
-
-    return Math.pow(
-        10,
-        min + (max - min) * position
-    );
-
-}
+    let autoClickerSpeed = 10;
 
 
-function updateSpeedDisplay() {
+    // ===============================
+    // OPEN / CLOSE
+    // ===============================
 
-    let speed = autoClickerSpeed;
+    autoClickerButton.onclick = function () {
 
-    if (speed >= 100) {
+        autoClickerPanel.classList.toggle("open");
 
-        autoSpeedText.textContent =
-            Math.round(speed) + " clicks/sec";
-
-    } else if (speed >= 1) {
-
-        autoSpeedText.textContent =
-            speed.toFixed(1).replace(".0", "") +
-            " clicks/sec";
-
-    } else {
-
-        const seconds = 1 / speed;
-
-        autoSpeedText.textContent =
-            "1 click every " +
-            seconds.toFixed(1).replace(".0", "") +
-            " seconds";
-
-    }
-
-}
+    };
 
 
-// ===============================
-// SLIDER
-// ===============================
+    // ===============================
+    // SELECT LOCATION
+    // ===============================
 
-autoSpeedSlider.oninput = function () {
+    selectAutoTarget.onclick = function () {
 
-    autoClickerSpeed =
-        sliderToSpeed(this.value);
+        selectingAutoTarget = true;
 
-    autoSpeedInput.value =
-        Number(autoClickerSpeed.toFixed(2));
-
-    updateSpeedDisplay();
-
-    if (autoClickerTarget) {
-        startAutoClicker();
-    }
-
-};
-
-
-// ===============================
-// TEXT INPUT
-// ===============================
-
-autoSpeedInput.onchange = function () {
-
-    let speed = Number(this.value);
-
-    if (!Number.isFinite(speed)) {
-        speed = 10;
-    }
-
-    speed = Math.max(0.1, Math.min(100, speed));
-
-    autoClickerSpeed = speed;
-
-    this.value = speed;
-
-    updateSpeedDisplay();
-
-    if (autoClickerTarget) {
-        startAutoClicker();
-    }
-
-};
-
-
-// ===============================
-// OPEN / CLOSE PANEL
-// ===============================
-
-autoClickerButton.onclick = function () {
-
-    if (autoClickerPanel.classList.contains("open")) {
+        autoClickerStatus.textContent =
+            "Tap a button to select it.";
 
         autoClickerPanel.classList.remove("open");
 
-    } else {
-
-        autoClickerPanel.classList.add("open");
-
-    }
-
-};
+    };
 
 
-// ===============================
-// SELECT TARGET
-// ===============================
+    // ===============================
+    // SELECT TARGET
+    // ===============================
 
-selectAutoTarget.onclick = function () {
+    document.addEventListener("click", function (event) {
 
-    selectingAutoTarget = true;
-
-    autoClickerStatus.textContent =
-        "Tap a button to select it.";
-
-    autoClickerPanel.classList.remove("open");
-
-};
+        if (!selectingAutoTarget) {
+            return;
+        }
 
 
-// ===============================
-// TARGET DETECTION
-// ===============================
-
-document.addEventListener("click", function (event) {
-
-    if (!selectingAutoTarget) {
-        return;
-    }
+        if (
+            event.target === autoClickerButton ||
+            autoClickerPanel.contains(event.target)
+        ) {
+            return;
+        }
 
 
-    if (
-        event.target === autoClickerButton ||
-        autoClickerPanel.contains(event.target)
-    ) {
-        return;
-    }
+        const target = event.target;
 
 
-    const target = event.target;
+        if (typeof target.click !== "function") {
+
+            selectingAutoTarget = false;
+
+            autoClickerPanel.classList.add("open");
+
+            autoClickerStatus.textContent =
+                "That cannot be selected.";
+
+            return;
+
+        }
 
 
-    if (typeof target.click !== "function") {
+        autoClickerTarget = target;
 
         selectingAutoTarget = false;
 
+        autoClickerStatus.textContent =
+            "Target selected!";
+
         autoClickerPanel.classList.add("open");
 
-        autoClickerStatus.textContent =
-            "That cannot be selected.";
+        startAutoClicker();
 
-        return;
-
-    }
+    }, true);
 
 
-    autoClickerTarget = target;
+    // ===============================
+    // SPEED INPUT
+    // ===============================
 
-    selectingAutoTarget = false;
+    autoSpeedInput.onchange = function () {
 
-    autoClickerStatus.textContent =
-        "Target selected!";
-
-    autoClickerPanel.classList.add("open");
-
-    startAutoClicker();
-
-}, true);
+        let speed = Number(this.value);
 
 
-// ===============================
-// AUTO CLICKING
-// ===============================
-
-function startAutoClicker() {
-
-    stopAutoClickerFunction();
+        if (!Number.isFinite(speed)) {
+            speed = 10;
+        }
 
 
-    if (!autoClickerTarget) {
-        return;
-    }
+        speed =
+            Math.max(0.1, Math.min(100, speed));
 
 
-    function clickLoop() {
+        autoClickerSpeed = speed;
+
+        this.value = speed;
+
+
+        if (autoClickerTarget) {
+            startAutoClicker();
+        }
+
+    };
+
+
+    // ===============================
+    // START AUTO CLICKER
+    // ===============================
+
+    function startAutoClicker() {
+
+        stopAutoClickerFunction();
+
 
         if (!autoClickerTarget) {
             return;
         }
 
 
-        autoClickerTarget.click();
+        function clickLoop() {
+
+            if (!autoClickerTarget) {
+                return;
+            }
 
 
-        const delay =
-            1000 / autoClickerSpeed;
+            autoClickerTarget.click();
 
 
-        autoClickerTimer =
-            setTimeout(clickLoop, delay);
+            const delay =
+                1000 / autoClickerSpeed;
+
+
+            autoClickerTimer =
+                setTimeout(clickLoop, delay);
+
+        }
+
+
+        clickLoop();
+
+    }
+
+
+    // ===============================
+    // STOP
+    // ===============================
+
+    function stopAutoClickerFunction() {
+
+        if (autoClickerTimer !== null) {
+
+            clearTimeout(autoClickerTimer);
+
+            autoClickerTimer = null;
+
+        }
 
     }
 
 
-    clickLoop();
+    // ===============================
+    // STOP BUTTON
+    // ===============================
 
-}
+    stopAutoClicker.onclick = function () {
 
+        stopAutoClickerFunction();
 
-// ===============================
-// STOP
-// ===============================
+        autoClickerStatus.textContent =
+            "Auto clicker stopped.";
 
-function stopAutoClickerFunction() {
+    };
 
-    if (autoClickerTimer !== null) {
-
-        clearTimeout(autoClickerTimer);
-
-        autoClickerTimer = null;
-
-    }
-
-}
-
-
-stopAutoClicker.onclick = function () {
-
-    stopAutoClickerFunction();
-
-    autoClickerStatus.textContent =
-        "Auto clicker stopped.";
-
-};
-
-
-// ===============================
-// INITIAL SETTINGS
-// ===============================
-
-autoSpeedSlider.value = 50;
-
-autoSpeedInput.value = 10;
-
-updateSpeedDisplay();
+});
