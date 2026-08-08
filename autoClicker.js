@@ -2,24 +2,38 @@
 // AUTO CLICKER
 // ===============================
 
-const autoClickerButton = document.getElementById("autoClickerButton");
-const autoClickerPanel = document.getElementById("autoClickerPanel");
-const selectAutoTarget = document.getElementById("selectAutoTarget");
-const stopAutoClicker = document.getElementById("stopAutoClicker");
-const autoClickerStatus = document.getElementById("autoClickerStatus");
+const autoClickerButton =
+    document.getElementById("autoClickerButton");
+
+const autoClickerPanel =
+    document.getElementById("autoClickerPanel");
+
+const selectAutoTarget =
+    document.getElementById("selectAutoTarget");
+
+const stopAutoClicker =
+    document.getElementById("stopAutoClicker");
+
+const autoClickerStatus =
+    document.getElementById("autoClickerStatus");
+
 
 let autoClickerTarget = null;
 let autoClickerInterval = null;
 let selectingAutoTarget = false;
 
 
-// Open / close the Auto Clicker panel
+// Open / close panel
 autoClickerButton.onclick = function () {
 
-    if (autoClickerPanel.style.display === "block") {
-        autoClickerPanel.style.display = "none";
+    if (autoClickerPanel.classList.contains("open")) {
+
+        autoClickerPanel.classList.remove("open");
+
     } else {
-        autoClickerPanel.style.display = "block";
+
+        autoClickerPanel.classList.add("open");
+
     }
 
 };
@@ -33,19 +47,20 @@ selectAutoTarget.onclick = function () {
     autoClickerStatus.textContent =
         "Tap a button to select it.";
 
-    autoClickerPanel.style.display = "none";
+    autoClickerPanel.classList.remove("open");
 
 };
 
 
-// Detect the selected element
+// Detect selected button
 document.addEventListener("click", function (event) {
 
     if (!selectingAutoTarget) {
         return;
     }
 
-    // Don't select the Auto Clicker itself
+
+    // Don't select the Auto Clicker controls
     if (
         event.target === autoClickerButton ||
         autoClickerPanel.contains(event.target)
@@ -53,43 +68,49 @@ document.addEventListener("click", function (event) {
         return;
     }
 
+
     const target = event.target;
 
-    // Only allow things that actually have a click function
+
+    // Only select things that can actually be activated
     if (typeof target.click !== "function") {
 
         selectingAutoTarget = false;
 
-        autoClickerPanel.style.display = "block";
+        autoClickerPanel.classList.add("open");
 
         autoClickerStatus.textContent =
             "That cannot be selected.";
 
         return;
+
     }
+
 
     autoClickerTarget = target;
 
     selectingAutoTarget = false;
 
-    autoClickerPanel.style.display = "block";
-
     autoClickerStatus.textContent =
         "Target selected!";
+
+    autoClickerPanel.classList.add("open");
 
     startAutoClicker();
 
 }, true);
 
 
-// Start clicking
+// Start auto clicking
 function startAutoClicker() {
 
     stopAutoClickerFunction();
 
+
     if (!autoClickerTarget) {
         return;
     }
+
 
     autoClickerInterval = setInterval(function () {
 
@@ -107,7 +128,7 @@ function startAutoClicker() {
 }
 
 
-// Stop clicking
+// Stop auto clicking
 function stopAutoClickerFunction() {
 
     if (autoClickerInterval !== null) {
