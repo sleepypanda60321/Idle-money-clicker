@@ -117,8 +117,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
+        // Minimum: 1 click/sec
+        // Maximum: 100 clicks/sec
+
         speed =
-            Math.max(0.1, Math.min(100, speed));
+            Math.max(1, Math.min(100, speed));
 
 
         autoClickerSpeed = speed;
