@@ -243,7 +243,14 @@ function formatMoney(num) {
 
 }
 
+function updateInventory() {
 
+    const printerCount =
+        document.getElementById("printerCount");
+
+    printerCount.textContent = printers;
+
+}
 
 function updateDisplay(){
 
@@ -264,6 +271,9 @@ if (digits < 7) {
 
     incomeDisplay.textContent =
 "+$" + formatMoney(income) + "/s";
+
+    updateInventory();
+    
 }
 
 
