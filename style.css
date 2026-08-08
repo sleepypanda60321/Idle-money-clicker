@@ -276,9 +276,9 @@ html, body {
 }
 
 
-/* =========================
-   AUTO CLICKER BUTTON
-   ========================= */
+ /* ===============================
+    AUTO CLICKER BUTTON
+    =============================== */
 
 #autoClickerButton {
 
@@ -302,10 +302,15 @@ html, body {
     justify-content: center;
 
     z-index: 50;
+
+    box-sizing: border-box;
+
 }
 
 
-/* Pixel cursor */
+/* ===============================
+   PIXEL CURSOR
+   =============================== */
 
 .pixelCursor {
 
@@ -326,16 +331,18 @@ html, body {
         0 100%
     );
 
+    display: block;
+
 }
 
 
-/* =========================
+/* ===============================
    AUTO CLICKER PANEL
-   ========================= */
+   =============================== */
 
 #autoClickerPanel {
 
-    display: none !important;
+    display: none;
 
     position: fixed;
 
@@ -349,19 +356,29 @@ html, body {
     background: white;
 
     border: 3px solid black;
+    border-radius: 10px;
 
     text-align: center;
 
     z-index: 51;
+
+    box-sizing: border-box;
+
 }
 
+
+/* JavaScript adds .open */
 
 #autoClickerPanel.open {
 
-    display: block !important;
+    display: block;
 
 }
 
+
+/* ===============================
+   PANEL BUTTONS
+   =============================== */
 
 #autoClickerPanel button {
 
@@ -373,18 +390,27 @@ html, body {
 
     padding: 10px;
 
+    font-size: 16px;
+
+    box-sizing: border-box;
+
 }
 
 
-/* =========================
-   SPEED CONTROLS
-   ========================= */
+/* ===============================
+   SPEED
+   =============================== */
 
-#autoClickerPanel input[type="range"] {
+#autoClickerSpeedControls {
 
-    width: 100%;
+    margin-top: 15px;
 
-    margin: 10px 0;
+}
+
+
+#autoClickerSpeedControls p {
+
+    margin: 5px 0;
 
 }
 
@@ -393,17 +419,12 @@ html, body {
 
     width: 80px;
 
-    padding: 6px;
+    padding: 7px;
 
     font-size: 16px;
 
-}
+    text-align: center;
 
-
-#autoSpeedText {
-
-    margin: 8px 0 0 0;
-
-    font-size: 14px;
+    box-sizing: border-box;
 
 }
