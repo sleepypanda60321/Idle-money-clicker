@@ -30,12 +30,13 @@ printer.onclick = function() {
 
         items.printer.owned++;
 
-        income += items.printer.income;
+income += items.printer.income;
 
 
-        updateDisplay();
+updateInventory();
+updateDisplay();
 
-        updateShop();
+updateShop();
 
         saveGame();
 
