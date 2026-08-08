@@ -297,38 +297,75 @@ html, body {
 }
 
 
-/* Auto Clicker Panel */
-
-#autoClickerPanel {
-    display: none;
-
+#autoClickerButton {
     position: fixed;
 
-    left: 20px;
-    bottom: 85px;
+    width: 55px;
+    height: 55px;
 
-    width: 220px;
-
-    padding: 15px;
-
-    background: white;
+    border-radius: 50%;
     border: 3px solid black;
 
-    z-index: 201;
+    background: white;
 
-    text-align: center;
+    padding: 0;
+
+    z-index: 200;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#autoClickerPanel h3 {
-    margin-top: 0;
-}
 
-#autoClickerPanel button {
+/* Pixel-art pointing finger */
+
+.pixelFinger {
+    position: relative;
+
+    width: 8px;
+    height: 28px;
+
+    background: black;
+
     display: block;
+}
 
-    width: 100%;
 
-    margin-top: 10px;
+/* Finger and hand pixels */
 
-    padding: 10px;
+.pixelFinger::before {
+    content: "";
+
+    position: absolute;
+
+    left: -8px;
+    top: 10px;
+
+    width: 24px;
+    height: 16px;
+
+    background: black;
+
+    box-shadow:
+        -8px 4px black,
+        8px 8px black,
+        0 16px black;
+}
+
+
+/* Pixel-art outline / tip */
+
+.pixelFinger::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: -8px;
+
+    width: 8px;
+    height: 8px;
+
+    background: black;
 }
