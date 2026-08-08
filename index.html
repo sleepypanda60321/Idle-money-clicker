@@ -402,11 +402,25 @@ saveButton.onclick = function(){
     const saveMessage =
         document.getElementById("saveMessage");
 
-    saveMessage.style.display = "flex";
+    const saveProgress =
+        document.getElementById("saveProgress");
+
+    saveMessage.classList.add("show");
+
+    saveProgress.style.transition = "none";
+    saveProgress.style.transform = "scaleX(1)";
+
+    void saveProgress.offsetWidth;
+
+    saveProgress.style.transition =
+        "transform 2s linear";
+
+    saveProgress.style.transform =
+        "scaleX(0)";
 
     setTimeout(function(){
 
-        saveMessage.style.display = "none";
+        saveMessage.classList.remove("show");
 
     }, 2000);
 
