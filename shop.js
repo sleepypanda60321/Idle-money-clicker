@@ -10,12 +10,11 @@ function updateShop() {
     let cost = getPrinterCost();
 
     printer.textContent =
-        "Printer - $" +
-        formatMoney(cost) +
-        " (+$1/sec)";
+        "DEBUG $" +
+        cost +
+        " | OWNED: " +
+        items.printer.owned;
 
-    console.log("Printer cost:", cost);
-    console.log("Printer text:", printer.textContent);
 }
 printer.onclick = function() {
 
