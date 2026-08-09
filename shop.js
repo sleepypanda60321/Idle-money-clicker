@@ -12,14 +12,11 @@ function updateShop() {
 
     let cost = getPrinterCost();
 
-    alert("Updated printer cost: $" + cost);
-
     printer.textContent =
-        "Printer - $" + formatMoney(cost) + " (+$1/sec)";
+        "Printer - $" +
+        formatMoney(cost) +
+        " (+$1/sec)";
 
-    alert("Printer button value: " + printer.textContent);
-
-}
 }
 
 printer.onclick = function () {
