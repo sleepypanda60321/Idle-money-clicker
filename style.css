@@ -176,7 +176,16 @@ html, body {
 }
 
 #saveButton,
-#deleteButton,
+#deleteButton {
+    width: 90%;
+    height: 50px;
+    background: #444;
+    color: white;
+    border: 4px solid white;
+    font-family: monospace;
+    font-size: 22px;
+}
+
 #cancelDelete,
 #confirmDelete {
     width: 90%;
