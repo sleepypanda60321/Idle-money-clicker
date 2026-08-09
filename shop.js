@@ -72,7 +72,7 @@ function updateShop() {
     printer.textContent =
         "🖨️ Printer - $" +
         formatMoney(cost) +
-        " (+$0.01/sec)";
+        " (+$1/sec)";
 
 }
 
