@@ -461,6 +461,12 @@ saveButton.onclick = function () {
 };
 
 let autoSaveTimer = null;
+let autoSaveNotificationTimer = null;
+
+
+// ===============================
+// 30-SECOND AUTO SAVE
+// ===============================
 
 function startAutoSave() {
 
@@ -469,6 +475,29 @@ function startAutoSave() {
     }
 
     autoSaveTimer = setInterval(function() {
+
+        if (autoSaveButton.classList.contains("on")) {
+
+            saveGame();
+
+        }
+
+    }, 30000); // 30 seconds
+
+}
+
+
+// ===============================
+// 5-MINUTE AUTO SAVE NOTIFICATION
+// ===============================
+
+function startAutoSaveNotification() {
+
+    if (autoSaveNotificationTimer !== null) {
+        clearInterval(autoSaveNotificationTimer);
+    }
+
+    autoSaveNotificationTimer = setInterval(function() {
 
         if (autoSaveButton.classList.contains("on")) {
 
@@ -483,15 +512,19 @@ function startAutoSave() {
             const saveProgress =
                 document.getElementById("saveProgress");
 
+
             saveMessageText.innerHTML =
                 '<span class="pixelCheck"></span> GAME AUTO SAVED';
 
+
             saveMessage.classList.add("show");
+
 
             saveProgress.style.transition = "none";
             saveProgress.style.transform = "scaleX(1)";
 
             void saveProgress.offsetWidth;
+
 
             saveProgress.style.transition =
                 "transform 2s linear";
@@ -499,12 +532,15 @@ function startAutoSave() {
             saveProgress.style.transform =
                 "scaleX(0)";
 
-            setTimeout(function() {
-    saveMessage.classList.remove("show");
 
-    saveMessageText.innerHTML =
-        '<span class="pixelCheck"></span> GAME SAVED';
-}, 2000);
+            setTimeout(function() {
+
+                saveMessage.classList.remove("show");
+
+                saveMessageText.innerHTML =
+                    '<span class="pixelCheck"></span> GAME SAVED';
+
+            }, 2000);
 
         }
 
@@ -512,7 +548,10 @@ function startAutoSave() {
 
 }
 
+
+// Start both systems
 startAutoSave();
+startAutoSaveNotification();
     
 const deleteButton =
     document.getElementById("deleteButton");
