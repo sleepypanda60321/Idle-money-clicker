@@ -465,7 +465,7 @@ html, body {
 
     padding: 0;
 
-    background: #333;
+    background: #aa0000;
     border: 3px solid white;
 
     box-sizing: border-box;
@@ -486,7 +486,7 @@ html, body {
 /* ON */
 
 #autoSaveButton.on {
-    background: #555;
+    background: #00aa00;
 }
 
 #autoSaveButton.on #autoSaveKnob {
