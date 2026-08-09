@@ -43,3 +43,4 @@ printer.onclick = function() {
 
 
 updateShop();
+loadGame();
