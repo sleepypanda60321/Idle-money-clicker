@@ -666,7 +666,12 @@ const themeModeButton =
     document.getElementById("themeModeButton");
 
 themeModeButton.onclick = function () {
+
     this.classList.toggle("on");
+
+    themeAutoButton.classList.remove("on");
+
+};
 };
 
 const themeAutoButton =
