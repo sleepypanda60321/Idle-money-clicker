@@ -91,7 +91,7 @@
 <button class="tab">Tab 1</button>
 <button class="tab">Tab 2</button>
 <button class="tab" id="shopTab">Shop</button>
-<button class="tab">Tab 4</button>
+<button class="tab" id="upgradesTab">Upgrades</button>
 <button class="tab" id="settingsTab">⚙️</button>
 
 </div>
@@ -124,6 +124,10 @@
 
 </div>
 
+<div id="upgrades">
+    <h2>UPGRADES</h2>
+</div>
+    
 <div id="settings">
 
 <div id="themeSetting">
@@ -233,25 +237,48 @@ Would you like to delete all your progress?
 <script>
 
 const shopTab = document.getElementById("shopTab");
+const upgradesTab = document.getElementById("upgradesTab");
 const settingsTab = document.getElementById("settingsTab");
 
 const shop = document.getElementById("shop");
+const upgrades = document.getElementById("upgrades");
 const settings = document.getElementById("settings");
 
+
 function openShop() {
+
     shop.style.display = "block";
+    upgrades.style.display = "none";
     settings.style.display = "none";
+
 }
+
+
+function openUpgrades() {
+
+    shop.style.display = "none";
+    upgrades.style.display = "block";
+    settings.style.display = "none";
+
+}
+
 
 function openSettings() {
+
     shop.style.display = "none";
+    upgrades.style.display = "none";
     settings.style.display = "block";
+
 }
 
+
 shopTab.onclick = openShop;
+upgradesTab.onclick = openUpgrades;
 settingsTab.onclick = openSettings;
 
+
 openShop();
+
 
 let money = 0;
 
@@ -275,8 +302,11 @@ const items = {
 };
 
 
-const moneyValue = document.getElementById("moneyValue");
-const incomeDisplay = document.getElementById("income");
+const moneyValue =
+    document.getElementById("moneyValue");
+
+const incomeDisplay =
+    document.getElementById("income");
 
 
 function calculateIncome() {
@@ -308,22 +338,31 @@ function formatMoney(num) {
 
     }
 
+
     const units = [
         "K", "M", "B", "T",
         "Qa", "Qi", "Sx", "Sp",
         "Oc", "No", "Dc"
     ];
 
+
     let unit = -1;
 
-    while (num >= 1000 && unit < units.length - 1) {
+
+    while (
+        num >= 1000 &&
+        unit < units.length - 1
+    ) {
 
         num /= 1000;
         unit++;
 
     }
 
-    return num.toFixed(1).replace(".0", "") + units[unit];
+
+    return num.toFixed(1)
+        .replace(".0", "") +
+        units[unit];
 
 }
 
@@ -332,6 +371,7 @@ function updateInventory() {
 
     const printerCount =
         document.getElementById("printerCount");
+
 
     if (printerCount) {
 
@@ -348,29 +388,41 @@ function updateDisplay() {
     moneyValue.textContent =
         "$" + formatMoney(money);
 
+
     let digits =
-        Math.floor(money).toString().length;
+        Math.floor(money)
+        .toString()
+        .length;
+
 
     if (digits < 7) {
 
-        moneyValue.style.fontSize = "48px";
+        moneyValue.style.fontSize =
+            "48px";
 
     } else if (digits < 10) {
 
-        moneyValue.style.fontSize = "40px";
+        moneyValue.style.fontSize =
+            "40px";
 
     } else if (digits < 13) {
 
-        moneyValue.style.fontSize = "32px";
+        moneyValue.style.fontSize =
+            "32px";
 
     } else {
 
-        moneyValue.style.fontSize = "26px";
+        moneyValue.style.fontSize =
+            "26px";
 
     }
 
+
     incomeDisplay.textContent =
-        "+$" + formatMoney(calculateIncome()) + "/s";
+        "+$" +
+        formatMoney(calculateIncome()) +
+        "/s";
+
 
     updateInventory();
 
@@ -388,15 +440,18 @@ function saveGame() {
         money
     );
 
+
     localStorage.setItem(
         "printerOwned",
         items.printer.owned
     );
 
+
     localStorage.setItem(
         "coinCollectorOwned",
         items.coinCollector.owned
     );
+
 
     localStorage.setItem(
         "lastTime",
@@ -426,7 +481,9 @@ function loadGame() {
 
     items.coinCollector.owned =
         Number(
-            localStorage.getItem("coinCollectorOwned")
+            localStorage.getItem(
+                "coinCollectorOwned"
+            )
         ) || 0;
 
 
@@ -440,19 +497,23 @@ function loadGame() {
 
         let secondsAway =
             Math.floor(
-                (Date.now() - lastTime) / 1000
+                (Date.now() - lastTime) /
+                1000
             );
 
 
         let earned =
-            secondsAway * calculateIncome();
+            secondsAway *
+            calculateIncome();
 
 
         if (earned > 0) {
 
             money += earned;
 
-            showOfflinePopup(earned);
+            showOfflinePopup(
+                earned
+            );
 
         }
 
@@ -462,14 +523,20 @@ function loadGame() {
     updateDisplay();
 
 
-    if (typeof updatePrinterShop === "function") {
+    if (
+        typeof updatePrinterShop ===
+        "function"
+    ) {
 
         updatePrinterShop();
 
     }
 
 
-    if (typeof updateCoinCollectorShop === "function") {
+    if (
+        typeof updateCoinCollectorShop ===
+        "function"
+    ) {
 
         updateCoinCollectorShop();
 
@@ -478,17 +545,24 @@ function loadGame() {
 }
 
 
+// ===============================
+// OFFLINE EARNINGS
+// ===============================
+
 document.addEventListener(
     "visibilitychange",
     function () {
 
         if (
-            document.visibilityState === "visible"
+            document.visibilityState ===
+            "visible"
         ) {
 
             let lastTime =
                 Number(
-                    localStorage.getItem("lastTime")
+                    localStorage.getItem(
+                        "lastTime"
+                    )
                 );
 
 
@@ -496,12 +570,14 @@ document.addEventListener(
 
                 let secondsAway =
                     Math.floor(
-                        (Date.now() - lastTime) / 1000
+                        (Date.now() - lastTime) /
+                        1000
                     );
 
 
                 let earned =
-                    secondsAway * calculateIncome();
+                    secondsAway *
+                    calculateIncome();
 
 
                 if (earned > 0) {
@@ -510,7 +586,9 @@ document.addEventListener(
 
                     updateDisplay();
 
-                    showOfflinePopup(earned);
+                    showOfflinePopup(
+                        earned
+                    );
 
                 }
 
@@ -522,6 +600,10 @@ document.addEventListener(
 );
 
 
+// ===============================
+// MAIN MONEY BUTTON
+// ===============================
+
 document.getElementById("dollar").onclick =
     function () {
 
@@ -532,7 +614,11 @@ document.getElementById("dollar").onclick =
     };
 
 
-setInterval(function(){
+// ===============================
+// PASSIVE INCOME
+// ===============================
+
+setInterval(function () {
 
     money += calculateIncome();
 
@@ -541,8 +627,14 @@ setInterval(function(){
 }, 1000);
 
 
+// ===============================
+// MANUAL SAVE
+// ===============================
+
 const saveButton =
-    document.getElementById("saveButton");
+    document.getElementById(
+        "saveButton"
+    );
 
 
 saveButton.onclick = function () {
@@ -551,17 +643,25 @@ saveButton.onclick = function () {
 
 
     const saveMessage =
-        document.getElementById("saveMessage");
+        document.getElementById(
+            "saveMessage"
+        );
 
 
     const saveProgress =
-        document.getElementById("saveProgress");
+        document.getElementById(
+            "saveProgress"
+        );
 
 
-    saveMessage.classList.add("show");
+    saveMessage.classList.add(
+        "show"
+    );
 
 
-    saveProgress.style.transition = "none";
+    saveProgress.style.transition =
+        "none";
+
 
     saveProgress.style.transform =
         "scaleX(1)";
@@ -580,35 +680,41 @@ saveButton.onclick = function () {
 
     setTimeout(function () {
 
-        saveMessage.classList.remove("show");
+        saveMessage.classList.remove(
+            "show"
+        );
 
     }, 2000);
 
 };
 
 
+// ===============================
+// AUTO SAVE
+// ===============================
+
 let autoSaveTimer = null;
 let autoSaveNotificationTimer = null;
 
-
-// ===============================
-// 30-SECOND AUTO SAVE
-// ===============================
 
 function startAutoSave() {
 
     if (autoSaveTimer !== null) {
 
-        clearInterval(autoSaveTimer);
+        clearInterval(
+            autoSaveTimer
+        );
 
     }
 
 
     autoSaveTimer =
-        setInterval(function() {
+        setInterval(function () {
 
             if (
-                autoSaveButton.classList.contains("on")
+                autoSaveButton
+                    .classList
+                    .contains("on")
             ) {
 
                 saveGame();
@@ -620,13 +726,12 @@ function startAutoSave() {
 }
 
 
-// ===============================
-// 5-MINUTE AUTO SAVE NOTIFICATION
-// ===============================
-
 function startAutoSaveNotification() {
 
-    if (autoSaveNotificationTimer !== null) {
+    if (
+        autoSaveNotificationTimer !==
+        null
+    ) {
 
         clearInterval(
             autoSaveNotificationTimer
@@ -636,10 +741,12 @@ function startAutoSaveNotification() {
 
 
     autoSaveNotificationTimer =
-        setInterval(function() {
+        setInterval(function () {
 
             if (
-                autoSaveButton.classList.contains("on")
+                autoSaveButton
+                    .classList
+                    .contains("on")
             ) {
 
                 saveGame();
@@ -667,11 +774,14 @@ function startAutoSaveNotification() {
                     '<span class="pixelCheck"></span> GAME AUTO SAVED';
 
 
-                saveMessage.classList.add("show");
+                saveMessage.classList.add(
+                    "show"
+                );
 
 
                 saveProgress.style.transition =
                     "none";
+
 
                 saveProgress.style.transform =
                     "scaleX(1)";
@@ -688,7 +798,7 @@ function startAutoSaveNotification() {
                     "scaleX(0)";
 
 
-                setTimeout(function() {
+                setTimeout(function () {
 
                     saveMessage.classList.remove(
                         "show"
@@ -711,32 +821,46 @@ startAutoSave();
 startAutoSaveNotification();
 
 
+// ===============================
+// DELETE PROGRESS
+// ===============================
+
 const deleteButton =
-    document.getElementById("deleteButton");
+    document.getElementById(
+        "deleteButton"
+    );
 
 
 const deletePopup =
-    document.getElementById("deletePopup");
+    document.getElementById(
+        "deletePopup"
+    );
 
 
 const cancelDelete =
-    document.getElementById("cancelDelete");
+    document.getElementById(
+        "cancelDelete"
+    );
 
 
 const confirmDelete =
-    document.getElementById("confirmDelete");
+    document.getElementById(
+        "confirmDelete"
+    );
 
 
 deleteButton.onclick = function () {
 
-    deletePopup.style.display = "flex";
+    deletePopup.style.display =
+        "flex";
 
 };
 
 
 cancelDelete.onclick = function () {
 
-    deletePopup.style.display = "none";
+    deletePopup.style.display =
+        "none";
 
 };
 
@@ -749,6 +873,10 @@ confirmDelete.onclick = function () {
 
 };
 
+
+// ===============================
+// OFFLINE POPUP
+// ===============================
 
 function showOfflinePopup(amount) {
 
@@ -775,45 +903,67 @@ function showOfflinePopup(amount) {
         formatMoney(amount);
 
 
-    popup.style.display = "flex";
+    popup.style.display =
+        "flex";
 
 
     close.onclick = function () {
 
-        popup.style.display = "none";
+        popup.style.display =
+            "none";
 
     };
 
 }
 
 
-autoSaveButton.onclick = function(){
+// ===============================
+// AUTO SAVE SWITCH
+// ===============================
 
-    if (
-        autoSaveButton.classList.contains("on")
-    ) {
+autoSaveButton.onclick =
+    function () {
 
-        autoSaveButton.classList.remove("on");
+        if (
+            autoSaveButton
+                .classList
+                .contains("on")
+        ) {
+
+            autoSaveButton
+                .classList
+                .remove("on");
 
 
-        if (autoSaveTimer !== null) {
+            if (
+                autoSaveTimer !== null
+            ) {
 
-            clearInterval(autoSaveTimer);
+                clearInterval(
+                    autoSaveTimer
+                );
 
-            autoSaveTimer = null;
+                autoSaveTimer = null;
+
+            }
+
+        } else {
+
+            autoSaveButton
+                .classList
+                .add("on");
+
+
+            startAutoSave();
 
         }
 
-    } else {
+    };
 
-        autoSaveButton.classList.add("on");
 
-        startAutoSave();
-
-    }
-
-};
-
+// ===============================
+// THEME SWITCH
+// ===============================
 
 const themeModeButton =
     document.getElementById(
@@ -821,13 +971,18 @@ const themeModeButton =
     );
 
 
-themeModeButton.onclick = function () {
+themeModeButton.onclick =
+    function () {
 
-    this.classList.toggle("on");
+        this.classList.toggle(
+            "on"
+        );
 
-    themeAutoButton.classList.remove("on");
+        themeAutoButton
+            .classList
+            .remove("on");
 
-};
+    };
 
 
 const themeAutoButton =
@@ -836,17 +991,21 @@ const themeAutoButton =
     );
 
 
-themeAutoButton.classList.add("on");
+themeAutoButton.classList.add(
+    "on"
+);
 
 
-themeAutoButton.onclick = function () {
+themeAutoButton.onclick =
+    function () {
 
-    this.classList.toggle("on");
+        this.classList.toggle(
+            "on"
+        );
 
-};
+    };
 
 </script>
-
 
 
 <script src="shop.js"></script>
