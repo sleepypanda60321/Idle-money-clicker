@@ -17,7 +17,7 @@ backpack.onclick = function(){
 };
 
 
-function updateInventory(){
+function updateInventory() {
 
     inventory.innerHTML = "";
 
@@ -37,9 +37,24 @@ function updateInventory(){
             const itemDisplay =
                 document.createElement("div");
 
+
+            let displayName = itemName;
+
+            // Add spaces to multi-word item names
+            displayName =
+                displayName.replace(
+                    /([a-z])([A-Z])/g,
+                    "$1 $2"
+                );
+
+
+            displayName =
+                displayName.charAt(0).toUpperCase() +
+                displayName.slice(1);
+
+
             itemDisplay.textContent =
-                itemName.charAt(0).toUpperCase() +
-                itemName.slice(1) +
+                displayName +
                 " × " +
                 item.owned;
 
