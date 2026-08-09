@@ -243,7 +243,7 @@ html, body {
     position: fixed;
 
     right: 10px;
-    top: 75px;
+    top: 95px;
 
     width: 45px;
     height: 45px;
@@ -288,7 +288,7 @@ html, body {
     visibility: hidden;
     position: fixed;
     right: 20px;
-    top: 120px;
+    top: 140px;
     width: 220px;
     padding: 15px;
     background: white;
