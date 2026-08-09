@@ -254,10 +254,11 @@ let money = 0;
 const items = {
 
     printer: {
-        owned: 0,
-        price: 50,
-        income: 1
-    }
+    owned: 0,
+    price: 50,
+    income: 0.01,
+    incomeMultiplier: 1
+}
 
 };
 
@@ -271,8 +272,9 @@ function calculateIncome() {
     for (const item in items) {
 
         totalIncome +=
-            items[item].owned *
-            items[item].income;
+    items[item].owned *
+    items[item].income *
+    (items[item].incomeMultiplier || 1);
 
     }
 
