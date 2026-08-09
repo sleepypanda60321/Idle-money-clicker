@@ -19,23 +19,9 @@ function updateShop() {
 
 }
 
-printer.onclick = function () {
+printer.onclick = function() {
 
-    let cost = getPrinterCost();
-
-    if (money >= cost) {
-
-        money -= cost;
-
-        items.printer.owned++;
-
-        updateInventory();
-        updateDisplay();
-        updateShop();
-
-        saveGame();
-
-    }
+    alert("PRINTER CLICK DETECTED");
 
 };
 
