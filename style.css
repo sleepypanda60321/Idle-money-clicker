@@ -481,7 +481,7 @@ html, body {
 #autoSaveLabel,
 #themeLabel,
 #themeModeLabel {
-    width: 120px;
+    width: 140px;
     flex-shrink: 0;
     text-align: left;
 }
