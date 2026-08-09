@@ -494,9 +494,9 @@ html, body {
 }
 
 #autoSaveButton {
-    background: red !important;
+    background: #aa0000 !important;
 }
 
 #autoSaveButton.on {
-    background: green !important;
+    background: #00aa00 !important;
 }
