@@ -274,7 +274,7 @@ html, body {
 }
 
 #autoClickerPanel {
-    display: none;
+    visibility: hidden;
     position: fixed;
     right: 20px;
     top: 120px;
@@ -289,7 +289,7 @@ html, body {
 }
 
 #autoClickerPanel.open {
-    display: block;
+    visibility: visible;
 }
 
 #autoClickerPanel button {
