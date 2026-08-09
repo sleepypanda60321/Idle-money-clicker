@@ -500,8 +500,11 @@ function startAutoSave() {
                 "scaleX(0)";
 
             setTimeout(function() {
-                saveMessage.classList.remove("show");
-            }, 2000);
+    saveMessage.classList.remove("show");
+
+    saveMessageText.innerHTML =
+        '<span class="pixelCheck"></span> GAME SAVED';
+}, 2000);
 
         }
 
