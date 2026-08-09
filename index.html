@@ -404,19 +404,15 @@ document.getElementById("dollar").onclick =
 
         updateDisplay();
 
-        saveGame();
-
     };
 
-setInterval(function () {
+setInterval(function(){
 
     money += calculateIncome();
 
     updateDisplay();
 
-    saveGame();
-
-}, 1000);
+},1000);
 
 const saveButton =
     document.getElementById("saveButton");
