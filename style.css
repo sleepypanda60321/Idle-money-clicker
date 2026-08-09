@@ -492,3 +492,11 @@ html, body {
 #autoSaveButton.on #autoSaveKnob {
     left: 30.5px;
 }
+
+#autoSaveButton {
+    background: red !important;
+}
+
+#autoSaveButton.on {
+    background: green !important;
+}
