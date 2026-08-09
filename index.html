@@ -460,6 +460,57 @@ saveButton.onclick = function () {
 
 };
 
+let autoSaveTimer = null;
+
+function startAutoSave() {
+
+    if (autoSaveTimer !== null) {
+        clearInterval(autoSaveTimer);
+    }
+
+    autoSaveTimer = setInterval(function() {
+
+        if (autoSaveButton.classList.contains("on")) {
+
+            saveGame();
+
+            const saveMessage =
+                document.getElementById("saveMessage");
+
+            const saveMessageText =
+                document.getElementById("saveMessageText");
+
+            const saveProgress =
+                document.getElementById("saveProgress");
+
+            saveMessageText.innerHTML =
+                '<span class="pixelCheck"></span> GAME AUTO SAVED';
+
+            saveMessage.classList.add("show");
+
+            saveProgress.style.transition = "none";
+            saveProgress.style.transform = "scaleX(1)";
+
+            void saveProgress.offsetWidth;
+
+            saveProgress.style.transition =
+                "transform 2s linear";
+
+            saveProgress.style.transform =
+                "scaleX(0)";
+
+            setTimeout(function() {
+                saveMessage.classList.remove("show");
+            }, 2000);
+
+        }
+
+    }, 300000); // 5 minutes
+
+}
+
+startAutoSave();
+    
 const deleteButton =
     document.getElementById("deleteButton");
 
