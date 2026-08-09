@@ -128,6 +128,8 @@
     <span id="autoSaveLabel">AUTO SAVE</span>
 
     <button id="autoSaveButton" aria-label="Toggle Auto Save">
+        <span class="toggleLabel darkLabel">DARK</span>
+        <span class="toggleLabel lightLabel">LIGHT</span>
         <span id="autoSaveKnob"></span>
     </button>
 </div>
@@ -513,7 +515,15 @@ function showOfflinePopup(amount) {
 
 }
 
+const autoSaveButton =
+    document.getElementById("autoSaveButton");
 
+autoSaveButton.onclick = function(){
+
+    autoSaveButton.classList.toggle("on");
+
+};
+    
 </script>
 
 
