@@ -218,7 +218,6 @@ function openSettings() {
 shopTab.onclick = openShop;
 settingsTab.onclick = openSettings;
 
-// Open Shop automatically on startup
 openShop();
 
 let money = 0;
@@ -232,8 +231,6 @@ const items = {
     }
 
 };
-
-
 
 const moneyValue = document.getElementById("moneyValue");
 const incomeDisplay = document.getElementById("income");
@@ -253,12 +250,11 @@ function calculateIncome() {
     return totalIncome;
 
 }
-    
+
 function formatMoney(num) {
 
     num = Math.floor(num);
 
-    // Under 10,000: show commas
     if (num < 10000) {
         return num.toLocaleString();
     }
@@ -290,76 +286,71 @@ function updateInventory() {
 
 }
 
-function updateDisplay(){
+function updateDisplay() {
 
-moneyValue.textContent = "$" + formatMoney(money);
+    moneyValue.textContent =
+        "$" + formatMoney(money);
 
-let digits = Math.floor(money).toString().length;
+    let digits =
+        Math.floor(money).toString().length;
 
-if (digits < 7) {
-    moneyValue.style.fontSize = "48px";
-} else if (digits < 10) {
-    moneyValue.style.fontSize = "40px";
-} else if (digits < 13) {
-    moneyValue.style.fontSize = "32px";
-} else {
-    moneyValue.style.fontSize = "26px";
-}
-
+    if (digits < 7) {
+        moneyValue.style.fontSize = "48px";
+    } else if (digits < 10) {
+        moneyValue.style.fontSize = "40px";
+    } else if (digits < 13) {
+        moneyValue.style.fontSize = "32px";
+    } else {
+        moneyValue.style.fontSize = "26px";
+    }
 
     incomeDisplay.textContent =
-"+$" + formatMoney(calculateIncome()) + "/s";
+        "+$" + formatMoney(calculateIncome()) + "/s";
+
     updateInventory();
-    
+
 }
 
-
-function saveGame(){
+function saveGame() {
 
     localStorage.setItem("money", money);
-    localStorage.setItem("income", income);
+
     localStorage.setItem(
-    "printerOwned",
-    items.printer.owned
-);
-    localStorage.setItem("lastTime", Date.now());
+        "printerOwned",
+        items.printer.owned
+    );
+
+    localStorage.setItem(
+        "lastTime",
+        Date.now()
+    );
 
 }
 
-
-function loadGame(){
+function loadGame() {
 
     money =
-    Number(localStorage.getItem("money")) || 0;
-
-
-    income =
-    Number(localStorage.getItem("income")) || 0;
-
+        Number(localStorage.getItem("money")) || 0;
 
     items.printer.owned =
-    Number(localStorage.getItem("printerOwned")) || 0;
-
+        Number(localStorage.getItem("printerOwned")) || 0;
 
     let lastTime =
-    Number(localStorage.getItem("lastTime"));
+        Number(localStorage.getItem("lastTime"));
 
-
-
-    if(lastTime){
+    if (lastTime) {
 
         let secondsAway =
-        Math.floor((Date.now() - lastTime) / 1000);
-
+            Math.floor(
+                (Date.now() - lastTime) / 1000
+            );
 
         let earned =
-        secondsAway * income;
+            secondsAway * calculateIncome();
 
-
-        if(earned > 0){
+        if (earned > 0) {
 
             money += earned;
-
 
             showOfflinePopup(earned);
 
@@ -367,52 +358,66 @@ function loadGame(){
 
     }
 
-
     updateDisplay();
-updateShop();
+
+    if (typeof updateShop === "function") {
+        updateShop();
+    }
 
 }
 
-document.addEventListener("visibilitychange", function() {
+document.addEventListener(
+    "visibilitychange",
+    function () {
 
-    if (document.visibilityState === "visible") {
+        if (
+            document.visibilityState === "visible"
+        ) {
 
-        let lastTime = Number(localStorage.getItem("lastTime"));
+            let lastTime =
+                Number(
+                    localStorage.getItem("lastTime")
+                );
 
-        if (lastTime) {
+            if (lastTime) {
 
-            let secondsAway = Math.floor((Date.now() - lastTime) / 1000);
+                let secondsAway =
+                    Math.floor(
+                        (Date.now() - lastTime) / 1000
+                    );
 
-            let earned = secondsAway * income;
+                let earned =
+                    secondsAway * calculateIncome();
 
-            if (earned > 0) {
+                if (earned > 0) {
 
-                money += earned;
+                    money += earned;
 
-                updateDisplay();
+                    updateDisplay();
 
-                showOfflinePopup(earned);
+                    showOfflinePopup(earned);
+
+                }
 
             }
+
         }
+
     }
+);
 
-});
+document.getElementById("dollar").onclick =
+    function () {
 
+        money++;
 
-document.getElementById("dollar").onclick = function(){
+        updateDisplay();
 
-    money++;
+        saveGame();
 
-    updateDisplay();
+    };
 
-    saveGame();
-
-};
-
-
-
-setInterval(function(){
+setInterval(function () {
 
     money += calculateIncome();
 
@@ -420,11 +425,12 @@ setInterval(function(){
 
     saveGame();
 
-},1000);
+}, 1000);
 
-const saveButton = document.getElementById("saveButton");
+const saveButton =
+    document.getElementById("saveButton");
 
-saveButton.onclick = function(){
+saveButton.onclick = function () {
 
     saveGame();
 
@@ -447,7 +453,7 @@ saveButton.onclick = function(){
     saveProgress.style.transform =
         "scaleX(0)";
 
-    setTimeout(function(){
+    setTimeout(function () {
 
         saveMessage.classList.remove("show");
 
@@ -455,44 +461,61 @@ saveButton.onclick = function(){
 
 };
 
-const deleteButton = document.getElementById("deleteButton");
-const deletePopup = document.getElementById("deletePopup");
-const cancelDelete = document.getElementById("cancelDelete");
-const confirmDelete = document.getElementById("confirmDelete");
+const deleteButton =
+    document.getElementById("deleteButton");
 
-deleteButton.onclick = function(){
+const deletePopup =
+    document.getElementById("deletePopup");
+
+const cancelDelete =
+    document.getElementById("cancelDelete");
+
+const confirmDelete =
+    document.getElementById("confirmDelete");
+
+deleteButton.onclick = function () {
 
     deletePopup.style.display = "flex";
 
 };
 
-cancelDelete.onclick = function(){
+cancelDelete.onclick = function () {
 
     deletePopup.style.display = "none";
 
 };
 
-confirmDelete.onclick = function(){
+confirmDelete.onclick = function () {
 
     localStorage.clear();
 
     location.reload();
 
 };
-    
-function showOfflinePopup(amount){
 
-    const popup = document.getElementById("offlinePopup");
-    const text = document.getElementById("offlineText");
-    const close = document.getElementById("closeOffline");
+function showOfflinePopup(amount) {
 
-    text.textContent = "While you were away, you earned $" + formatMoney(amount);
+    const popup =
+        document.getElementById("offlinePopup");
+
+    const text =
+        document.getElementById("offlineText");
+
+    const close =
+        document.getElementById("closeOffline");
+
+    text.textContent =
+        "While you were away, you earned $" +
+        formatMoney(amount);
 
     popup.style.display = "flex";
 
-    close.onclick = function(){
+    close.onclick = function () {
+
         popup.style.display = "none";
+
     };
+
 }
 
 
