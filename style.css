@@ -460,78 +460,7 @@ html, body {
 }
 
 
-#autoSaveSetting {
-    width: 90%;
-    height: 38px;
-
-    display: flex;
-    align-items: center;
-
-    margin-bottom: 6px;
-
-    color: white;
-    font-family: monospace;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-#autoSaveLabel {
-    margin-right: auto;
-}
-
-#autoSaveOffLabel {
-    margin-right: 5px;
-}
-
-#autoSaveOnLabel {
-    margin-left: 5px;
-}
-
-#autoSaveButton {
-    position: relative;
-
-    width: 58px;
-    height: 30px;
-
-    padding: 0;
-
-    background: #aa0000;
-    border: 3px solid white;
-
-    box-sizing: border-box;
-}
-
-#autoSaveKnob {
-    position: absolute;
-
-    top: 3px;
-    left: 3px;
-
-    width: 18px;
-    height: 18px;
-
-    background: white;
-}
-
-/* ON */
-
-#autoSaveButton.on {
-    background: #00aa00;
-}
-
-#autoSaveButton.on #autoSaveKnob {
-    left: 30.5px;
-}
-
-#autoSaveButton {
-    background: #aa0000 !important;
-}
-
-#autoSaveButton.on {
-    background: #00aa00 !important;
-}
-
-
+#autoSaveSetting,
 #themeSetting,
 #themeModeSetting {
     width: 90%;
@@ -548,21 +477,35 @@ html, body {
     font-weight: bold;
 }
 
+/* Setting names — all aligned left */
+#autoSaveLabel,
 #themeLabel,
 #themeModeLabel {
-    margin-right: auto;
+    width: 120px;
+    flex-shrink: 0;
+    text-align: left;
 }
 
+/* Left option — immediately beside switch */
+#autoSaveOffLabel,
 #themeOffLabel,
 #themeLightLabel {
-    margin-right: 5px;
+    width: auto;
+    margin: 0 5px 0 0;
+    text-align: right;
 }
 
+/* Right option — immediately beside switch */
+#autoSaveOnLabel,
 #themeOnLabel,
 #themeDarkLabel {
-    margin-left: 5px;
+    width: auto;
+    margin: 0 0 0 5px;
+    text-align: left;
 }
 
+/* Switches — same exact column */
+#autoSaveButton,
 #themeAutoButton,
 #themeModeButton {
     position: relative;
@@ -572,12 +515,17 @@ html, body {
 
     padding: 0;
 
-    background: #aa0000;
+    background: #888;
+
     border: 3px solid white;
 
     box-sizing: border-box;
+
+    flex-shrink: 0;
 }
 
+/* Knobs */
+#autoSaveKnob,
 #themeAutoKnob,
 #themeModeKnob {
     position: absolute;
@@ -591,11 +539,8 @@ html, body {
     background: white;
 }
 
-#themeAutoButton.on,
-#themeModeButton.on {
-    background: #00aa00;
-}
-
+/* ON position */
+#autoSaveButton.on #autoSaveKnob,
 #themeAutoButton.on #themeAutoKnob,
 #themeModeButton.on #themeModeKnob {
     left: 30.5px;
