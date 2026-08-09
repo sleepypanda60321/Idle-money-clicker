@@ -5,43 +5,34 @@ function getPrinterCost() {
 
     const owned = items.printer.owned;
 
-    // 0–99 printers: +$1 each
-    if (owned < 100) {
-        return items.printer.price + owned;
+    // 0–49 printers: +$500 each
+    if (owned < 50) {
+        return items.printer.price +
+               (owned * 500);
     }
 
-    // 100–999 printers: +$5 each
+    // 50–99 printers: +$1,000 each
+    if (owned < 100) {
+        return items.printer.price +
+               (50 * 500) +
+               ((owned - 50) * 1000);
+    }
+
+    // 100–499 printers: +$2,500 each
+    if (owned < 500) {
+        return items.printer.price +
+               (50 * 500) +
+               (50 * 1000) +
+               ((owned - 100) * 2500);
+    }
+
+    // 500–999 printers: +$5,000 each
     if (owned < 1000) {
         return items.printer.price +
-               100 +
-               ((owned - 100) * 5);
-    }
-
-    // 1,000–4,999 printers: +$10 each
-    if (owned < 5000) {
-        return items.printer.price +
-               100 +
-               (900 * 5) +
-               ((owned - 1000) * 10);
-    }
-
-    // 5,000–99,999 printers: +$50 each
-    if (owned < 100000) {
-        return items.printer.price +
-               100 +
-               (900 * 5) +
-               (4000 * 10) +
-               ((owned - 5000) * 50);
-    }
-
-    // 100,000–999,999 printers: +$100 each
-    if (owned < 1000000) {
-        return items.printer.price +
-               100 +
-               (900 * 5) +
-               (4000 * 10) +
-               (95000 * 50) +
-               ((owned - 100000) * 100);
+               (50 * 500) +
+               (50 * 1000) +
+               (400 * 2500) +
+               ((owned - 500) * 5000);
     }
 
     // Maximum reached
@@ -54,10 +45,10 @@ function updateShop() {
 
     const owned = items.printer.owned;
 
-    if (owned >= 1000000) {
+    if (owned >= 1000) {
 
         printer.textContent =
-            "Printer - MAXIMUM (1,000,000)";
+            "🖨️ Printer - MAXIMUM (1,000)";
 
         printer.disabled = true;
 
@@ -83,7 +74,7 @@ printer.onclick = function() {
 
     if (
         money >= cost &&
-        items.printer.owned < 1000000
+        items.printer.owned < 1000
     ) {
 
         money -= cost;
