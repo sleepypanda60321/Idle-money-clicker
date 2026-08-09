@@ -5,16 +5,19 @@ function getPrinterCost() {
 
     const owned = items.printer.owned;
 
+    // 0–99 printers: +$1 each
     if (owned < 100) {
         return items.printer.price + owned;
     }
 
+    // 100–999 printers: +$5 each
     if (owned < 1000) {
         return items.printer.price +
                100 +
                ((owned - 100) * 5);
     }
 
+    // 1,000–4,999 printers: +$10 each
     if (owned < 5000) {
         return items.printer.price +
                100 +
@@ -22,6 +25,7 @@ function getPrinterCost() {
                ((owned - 1000) * 10);
     }
 
+    // 5,000–99,999 printers: +$50 each
     if (owned < 100000) {
         return items.printer.price +
                100 +
@@ -30,6 +34,7 @@ function getPrinterCost() {
                ((owned - 5000) * 50);
     }
 
+    // 100,000–999,999 printers: +$100 each
     if (owned < 1000000) {
         return items.printer.price +
                100 +
@@ -39,6 +44,7 @@ function getPrinterCost() {
                ((owned - 100000) * 100);
     }
 
+    // Maximum reached
     return Infinity;
 
 }
@@ -64,7 +70,7 @@ function updateShop() {
     printer.disabled = false;
 
     printer.textContent =
-        "Printer - $" +
+        "🖨️ Printer - $" +
         formatMoney(cost) +
         " (+$0.01/sec)";
 
@@ -73,19 +79,17 @@ function updateShop() {
 
 printer.onclick = function() {
 
-    if (items.printer.owned >= 1000000) {
-        return;
-    }
-
     const cost = getPrinterCost();
 
-    if (money >= cost) {
+    if (
+        money >= cost &&
+        items.printer.owned < 1000000
+    ) {
 
         money -= cost;
 
         items.printer.owned++;
 
-        updateInventory();
         updateDisplay();
         updateShop();
 
@@ -96,14 +100,7 @@ printer.onclick = function() {
 };
 
 
-items.printer.owned++;
-
-updateDisplay();
-
-printer.textContent =
-    "Printer - $" +
-    formatMoney(getPrinterCost()) +
-    " (+$0.01/sec)";
-
-saveGame();
+// Load the saved game first,
+// then show the correct printer price.
 loadGame();
+updateShop();
