@@ -49,5 +49,3 @@ updateShop();
 console.log("Printer owned:", items.printer.owned);
 console.log("Printer button:", printer.textContent);
 loadGame();
-
-alert(items.printer.owned);
