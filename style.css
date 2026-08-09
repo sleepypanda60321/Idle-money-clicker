@@ -477,7 +477,7 @@ html, body {
     font-weight: bold;
 }
 
-/* Setting names — all aligned left */
+/* Setting names */
 #autoSaveLabel,
 #themeLabel,
 #themeModeLabel {
@@ -486,25 +486,26 @@ html, body {
     text-align: left;
 }
 
-/* Left option — immediately beside switch */
+/* Option labels */
 #autoSaveOffLabel,
 #themeOffLabel,
 #themeLightLabel {
-    width: auto;
-    margin: 0 5px 0 0;
+    width: 45px;
+    flex-shrink: 0;
     text-align: right;
+    margin-right: 5px;
 }
 
-/* Right option — immediately beside switch */
 #autoSaveOnLabel,
 #themeOnLabel,
 #themeDarkLabel {
-    width: auto;
-    margin: 0 0 0 5px;
+    width: 45px;
+    flex-shrink: 0;
     text-align: left;
+    margin-left: 5px;
 }
 
-/* Switches — same exact column */
+/* All switches */
 #autoSaveButton,
 #themeAutoButton,
 #themeModeButton {
@@ -515,13 +516,26 @@ html, body {
 
     padding: 0;
 
-    background: #888;
-
     border: 3px solid white;
 
     box-sizing: border-box;
 
     flex-shrink: 0;
+}
+
+/* Auto Save colors */
+#autoSaveButton {
+    background: #aa0000;
+}
+
+#autoSaveButton.on {
+    background: #00aa00;
+}
+
+/* Theme switches stay neutral */
+#themeAutoButton,
+#themeModeButton {
+    background: #888;
 }
 
 /* Knobs */
