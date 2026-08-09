@@ -511,3 +511,13 @@ html, body {
 #autoSaveButton.on {
     background: #00aa00 !important;
 }
+
+
+#autoClickerButton {
+    position: fixed !important;
+    right: 10px !important;
+    top: 75px !important;
+    width: 45px !important;
+    height: 45px !important;
+    z-index: 999999 !important;
+}
