@@ -559,3 +559,12 @@ html, body {
 #themeModeButton.on #themeModeKnob {
     left: 30.5px;
 }
+
+
+
+#shop {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
