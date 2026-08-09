@@ -127,11 +127,13 @@
 <div id="autoSaveSetting">
     <span id="autoSaveLabel">AUTO SAVE</span>
 
+    <span id="darkLabel">DARK</span>
+
     <button id="autoSaveButton" aria-label="Toggle Auto Save">
-        <span class="toggleLabel darkLabel">DARK</span>
-        <span class="toggleLabel lightLabel">LIGHT</span>
         <span id="autoSaveKnob"></span>
     </button>
+
+    <span id="lightLabel">LIGHT</span>
 </div>
     
 <button id="saveButton">
@@ -520,7 +522,15 @@ const autoSaveButton =
 
 autoSaveButton.onclick = function(){
 
-    autoSaveButton.classList.toggle("on");
+    if (autoSaveButton.classList.contains("on")) {
+
+        autoSaveButton.classList.remove("on");
+
+    } else {
+
+        autoSaveButton.classList.add("on");
+
+    }
 
 };
     
