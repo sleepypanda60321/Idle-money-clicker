@@ -223,6 +223,11 @@ settingsTab.onclick = openSettings;
 
 openShop();
 
+
+/* ==============================
+   GAME DATA
+============================== */
+
 let money = 0;
 
 const items = {
@@ -235,8 +240,28 @@ const items = {
 
 };
 
-const moneyValue = document.getElementById("moneyValue");
-const incomeDisplay = document.getElementById("income");
+
+/* ==============================
+   AUTO SAVE BUTTON
+============================== */
+
+const autoSaveButton =
+    document.getElementById("autoSaveButton");
+
+// Auto Save is ON by default
+autoSaveButton.classList.add("on");
+
+
+/* ==============================
+   DISPLAY
+============================== */
+
+const moneyValue =
+    document.getElementById("moneyValue");
+
+const incomeDisplay =
+    document.getElementById("income");
+
 
 function calculateIncome() {
 
@@ -254,6 +279,7 @@ function calculateIncome() {
 
 }
 
+
 function formatMoney(num) {
 
     num = Math.floor(num);
@@ -270,14 +296,23 @@ function formatMoney(num) {
 
     let unit = -1;
 
-    while (num >= 1000 && unit < units.length - 1) {
+    while (
+        num >= 1000 &&
+        unit < units.length - 1
+    ) {
+
         num /= 1000;
         unit++;
+
     }
 
-    return num.toFixed(1).replace(".0", "") + units[unit];
+    return num
+        .toFixed(1)
+        .replace(".0", "") +
+        units[unit];
 
 }
+
 
 function updateInventory() {
 
@@ -289,6 +324,7 @@ function updateInventory() {
 
 }
 
+
 function updateDisplay() {
 
     moneyValue.textContent =
@@ -298,25 +334,47 @@ function updateDisplay() {
         Math.floor(money).toString().length;
 
     if (digits < 7) {
-        moneyValue.style.fontSize = "48px";
+
+        moneyValue.style.fontSize =
+            "48px";
+
     } else if (digits < 10) {
-        moneyValue.style.fontSize = "40px";
+
+        moneyValue.style.fontSize =
+            "40px";
+
     } else if (digits < 13) {
-        moneyValue.style.fontSize = "32px";
+
+        moneyValue.style.fontSize =
+            "32px";
+
     } else {
-        moneyValue.style.fontSize = "26px";
+
+        moneyValue.style.fontSize =
+            "26px";
+
     }
 
     incomeDisplay.textContent =
-        "+$" + formatMoney(calculateIncome()) + "/s";
+        "+$" +
+        formatMoney(calculateIncome()) +
+        "/s";
 
     updateInventory();
 
 }
 
+
+/* ==============================
+   SAVE / LOAD
+============================== */
+
 function saveGame() {
 
-    localStorage.setItem("money", money);
+    localStorage.setItem(
+        "money",
+        money
+    );
 
     localStorage.setItem(
         "printerOwned",
@@ -330,32 +388,45 @@ function saveGame() {
 
 }
 
+
 function loadGame() {
 
     money =
-        Number(localStorage.getItem("money")) || 0;
+        Number(
+            localStorage.getItem("money")
+        ) || 0;
 
     items.printer.owned =
-        Number(localStorage.getItem("printerOwned")) || 0;
+        Number(
+            localStorage.getItem(
+                "printerOwned"
+            )
+        ) || 0;
 
     let lastTime =
-        Number(localStorage.getItem("lastTime"));
+        Number(
+            localStorage.getItem("lastTime")
+        );
 
     if (lastTime) {
 
         let secondsAway =
             Math.floor(
-                (Date.now() - lastTime) / 1000
+                (Date.now() - lastTime) /
+                1000
             );
 
         let earned =
-            secondsAway * calculateIncome();
+            secondsAway *
+            calculateIncome();
 
         if (earned > 0) {
 
             money += earned;
 
-            showOfflinePopup(earned);
+            showOfflinePopup(
+                earned
+            );
 
         }
 
@@ -363,34 +434,49 @@ function loadGame() {
 
     updateDisplay();
 
-    if (typeof updateShop === "function") {
+    if (
+        typeof updateShop ===
+        "function"
+    ) {
+
         updateShop();
+
     }
 
 }
+
+
+/* ==============================
+   OFFLINE EARNINGS
+============================== */
 
 document.addEventListener(
     "visibilitychange",
     function () {
 
         if (
-            document.visibilityState === "visible"
+            document.visibilityState ===
+            "visible"
         ) {
 
             let lastTime =
                 Number(
-                    localStorage.getItem("lastTime")
+                    localStorage.getItem(
+                        "lastTime"
+                    )
                 );
 
             if (lastTime) {
 
                 let secondsAway =
                     Math.floor(
-                        (Date.now() - lastTime) / 1000
+                        (Date.now() - lastTime) /
+                        1000
                     );
 
                 let earned =
-                    secondsAway * calculateIncome();
+                    secondsAway *
+                    calculateIncome();
 
                 if (earned > 0) {
 
@@ -398,7 +484,9 @@ document.addEventListener(
 
                     updateDisplay();
 
-                    showOfflinePopup(earned);
+                    showOfflinePopup(
+                        earned
+                    );
 
                 }
 
@@ -409,40 +497,75 @@ document.addEventListener(
     }
 );
 
-document.getElementById("dollar").onclick =
-    function () {
 
-        money++;
+/* ==============================
+   DOLLAR BUTTON
+============================== */
 
-        updateDisplay();
+document.getElementById(
+    "dollar"
+).onclick = function () {
 
-    };
+    money++;
 
-setInterval(function(){
+    updateDisplay();
+
+};
+
+
+/* ==============================
+   PASSIVE INCOME
+============================== */
+
+setInterval(function () {
 
     money += calculateIncome();
 
     updateDisplay();
 
-},1000);
+}, 1000);
+
+
+/* ==============================
+   MANUAL SAVE
+============================== */
 
 const saveButton =
-    document.getElementById("saveButton");
+    document.getElementById(
+        "saveButton"
+    );
 
 saveButton.onclick = function () {
 
     saveGame();
 
     const saveMessage =
-        document.getElementById("saveMessage");
+        document.getElementById(
+            "saveMessage"
+        );
 
     const saveProgress =
-        document.getElementById("saveProgress");
+        document.getElementById(
+            "saveProgress"
+        );
 
-    saveMessage.classList.add("show");
+    const saveMessageText =
+        document.getElementById(
+            "saveMessageText"
+        );
 
-    saveProgress.style.transition = "none";
-    saveProgress.style.transform = "scaleX(1)";
+    saveMessageText.innerHTML =
+        '<span class="pixelCheck"></span> GAME SAVED';
+
+    saveMessage.classList.add(
+        "show"
+    );
+
+    saveProgress.style.transition =
+        "none";
+
+    saveProgress.style.transform =
+        "scaleX(1)";
 
     void saveProgress.offsetWidth;
 
@@ -454,155 +577,245 @@ saveButton.onclick = function () {
 
     setTimeout(function () {
 
-        saveMessage.classList.remove("show");
+        saveMessage.classList.remove(
+            "show"
+        );
 
     }, 2000);
 
 };
 
+
+/* ==============================
+   AUTO SAVE
+============================== */
+
 let autoSaveTimer = null;
+
 
 function startAutoSave() {
 
     if (autoSaveTimer !== null) {
-        clearInterval(autoSaveTimer);
+
+        clearInterval(
+            autoSaveTimer
+        );
+
     }
 
-    autoSaveTimer = setInterval(function() {
+    autoSaveTimer =
+        setInterval(function () {
 
-        if (autoSaveButton.classList.contains("on")) {
+            if (
+                autoSaveButton.classList
+                    .contains("on")
+            ) {
 
-            saveGame();
+                saveGame();
 
-            const saveMessage =
-                document.getElementById("saveMessage");
+                const saveMessage =
+                    document.getElementById(
+                        "saveMessage"
+                    );
 
-            const saveMessageText =
-                document.getElementById("saveMessageText");
+                const saveMessageText =
+                    document.getElementById(
+                        "saveMessageText"
+                    );
 
-            const saveProgress =
-                document.getElementById("saveProgress");
+                const saveProgress =
+                    document.getElementById(
+                        "saveProgress"
+                    );
 
-            saveMessageText.innerHTML =
-                '<span class="pixelCheck"></span> GAME AUTO SAVED';
+                saveMessageText.innerHTML =
+                    '<span class="pixelCheck"></span> GAME AUTO SAVED';
 
-            saveMessage.classList.add("show");
+                saveMessage.classList.add(
+                    "show"
+                );
 
-            saveProgress.style.transition = "none";
-            saveProgress.style.transform = "scaleX(1)";
+                saveProgress.style.transition =
+                    "none";
 
-            void saveProgress.offsetWidth;
+                saveProgress.style.transform =
+                    "scaleX(1)";
 
-            saveProgress.style.transition =
-                "transform 2s linear";
+                void saveProgress.offsetWidth;
 
-            saveProgress.style.transform =
-                "scaleX(0)";
+                saveProgress.style.transition =
+                    "transform 2s linear";
 
-            setTimeout(function() {
-    saveMessage.classList.remove("show");
+                saveProgress.style.transform =
+                    "scaleX(0)";
 
-    saveMessageText.innerHTML =
-        '<span class="pixelCheck"></span> GAME SAVED';
-}, 2000);
+                setTimeout(function () {
 
-        }
+                    saveMessage.classList.remove(
+                        "show"
+                    );
 
-    }, 300000); // 5 minutes
+                    saveMessageText.innerHTML =
+                        '<span class="pixelCheck"></span> GAME SAVED';
+
+                }, 2000);
+
+            }
+
+        }, 300000);
 
 }
 
+
+/* ==============================
+   AUTO SAVE TOGGLE
+============================== */
+
+autoSaveButton.onclick =
+    function () {
+
+        if (
+            autoSaveButton.classList
+                .contains("on")
+        ) {
+
+            // Turn Auto Save OFF
+
+            autoSaveButton.classList
+                .remove("on");
+
+            if (
+                autoSaveTimer !== null
+            ) {
+
+                clearInterval(
+                    autoSaveTimer
+                );
+
+                autoSaveTimer = null;
+
+            }
+
+        } else {
+
+            // Turn Auto Save ON
+
+            autoSaveButton.classList
+                .add("on");
+
+            startAutoSave();
+
+        }
+
+    };
+
+
+/* Start Auto Save because
+   the default is ON */
+
 startAutoSave();
-    
+
+
+/* ==============================
+   DELETE PROGRESS
+============================== */
+
 const deleteButton =
-    document.getElementById("deleteButton");
+    document.getElementById(
+        "deleteButton"
+    );
 
 const deletePopup =
-    document.getElementById("deletePopup");
+    document.getElementById(
+        "deletePopup"
+    );
 
 const cancelDelete =
-    document.getElementById("cancelDelete");
+    document.getElementById(
+        "cancelDelete"
+    );
 
 const confirmDelete =
-    document.getElementById("confirmDelete");
+    document.getElementById(
+        "confirmDelete"
+    );
 
-deleteButton.onclick = function () {
 
-    deletePopup.style.display = "flex";
+deleteButton.onclick =
+    function () {
 
-};
+        deletePopup.style.display =
+            "flex";
 
-cancelDelete.onclick = function () {
+    };
 
-    deletePopup.style.display = "none";
 
-};
+cancelDelete.onclick =
+    function () {
 
-confirmDelete.onclick = function () {
+        deletePopup.style.display =
+            "none";
 
-    localStorage.clear();
+    };
 
-    location.reload();
 
-};
+confirmDelete.onclick =
+    function () {
 
-function showOfflinePopup(amount) {
+        localStorage.clear();
+
+        location.reload();
+
+    };
+
+
+/* ==============================
+   OFFLINE POPUP
+============================== */
+
+function showOfflinePopup(
+    amount
+) {
 
     const popup =
-        document.getElementById("offlinePopup");
+        document.getElementById(
+            "offlinePopup"
+        );
 
     const text =
-        document.getElementById("offlineText");
+        document.getElementById(
+            "offlineText"
+        );
 
     const close =
-        document.getElementById("closeOffline");
+        document.getElementById(
+            "closeOffline"
+        );
 
     text.textContent =
         "While you were away, you earned $" +
         formatMoney(amount);
 
-    popup.style.display = "flex";
+    popup.style.display =
+        "flex";
 
-    close.onclick = function () {
+    close.onclick =
+        function () {
 
-        popup.style.display = "none";
+            popup.style.display =
+                "none";
 
-    };
+        };
 
 }
 
-const autoSaveButton =
-    document.getElementById("autoSaveButton");
 
-// Auto Save is ON by default
-autoSaveButton.classList.add("on");
+/* ==============================
+   LOAD GAME
+============================== */
 
+loadGame();
 
-autoSaveButton.onclick = function(){
-
-    autoSaveButton.onclick = function(){
-
-    if (autoSaveButton.classList.contains("on")) {
-
-        // Turn Auto Save OFF
-        autoSaveButton.classList.remove("on");
-
-        if (autoSaveTimer !== null) {
-            clearInterval(autoSaveTimer);
-            autoSaveTimer = null;
-        }
-
-    } else {
-
-        // Turn Auto Save ON
-        autoSaveButton.classList.add("on");
-
-        startAutoSave();
-
-    }
-
-};
-    
 </script>
 
 
