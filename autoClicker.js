@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+function setupAutoClicker() {
 
     const autoClickerButton =
         document.getElementById("autoClickerButton");
@@ -205,4 +205,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     };
 
-});
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener(
+        "DOMContentLoaded",
+        setupAutoClicker
+    );
+} else {
+    setupAutoClicker();
+}
