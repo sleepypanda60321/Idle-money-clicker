@@ -32,7 +32,7 @@ function setupAutoClicker() {
 
     autoClickerButton.onclick = function () {
 
-    alert("AUTO CLICKER BUTTON WORKS");
+    autoClickerPanel.classList.toggle("open");
 
 };
 
