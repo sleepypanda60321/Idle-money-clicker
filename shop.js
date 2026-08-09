@@ -26,7 +26,7 @@ printer.onclick = function() {
 
         money -= cost;
 
-        items.printer.owned++;
+        items.printer.owned = items.printer.owned + 1;
 
         updateInventory();
         updateDisplay();
