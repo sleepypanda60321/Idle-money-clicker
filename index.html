@@ -255,7 +255,7 @@ openShop();
 
 let money = 0;
 
-    
+
 const items = {
 
     coinCollector: {
@@ -264,18 +264,20 @@ const items = {
         income: 0.50,
         incomeMultiplier: 1
     },
-    
+
     printer: {
-    owned: 0,
-    price: 5000,
-    income: 1,
-    incomeMultiplier: 1
-}
+        owned: 0,
+        price: 5000,
+        income: 1,
+        incomeMultiplier: 1
+    }
 
 };
 
+
 const moneyValue = document.getElementById("moneyValue");
 const incomeDisplay = document.getElementById("income");
+
 
 function calculateIncome() {
 
@@ -284,9 +286,9 @@ function calculateIncome() {
     for (const item in items) {
 
         totalIncome +=
-    items[item].owned *
-    items[item].income *
-    (items[item].incomeMultiplier || 1);
+            items[item].owned *
+            items[item].income *
+            (items[item].incomeMultiplier || 1);
 
     }
 
@@ -294,13 +296,16 @@ function calculateIncome() {
 
 }
 
+
 function formatMoney(num) {
 
     if (num < 10000) {
+
         return num.toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         });
+
     }
 
     const units = [
@@ -312,23 +317,31 @@ function formatMoney(num) {
     let unit = -1;
 
     while (num >= 1000 && unit < units.length - 1) {
+
         num /= 1000;
         unit++;
+
     }
 
     return num.toFixed(1).replace(".0", "") + units[unit];
 
 }
 
+
 function updateInventory() {
 
     const printerCount =
         document.getElementById("printerCount");
 
-    printerCount.textContent =
-        items.printer.owned;
+    if (printerCount) {
+
+        printerCount.textContent =
+            items.printer.owned;
+
+    }
 
 }
+
 
 function updateDisplay() {
 
@@ -339,13 +352,21 @@ function updateDisplay() {
         Math.floor(money).toString().length;
 
     if (digits < 7) {
+
         moneyValue.style.fontSize = "48px";
+
     } else if (digits < 10) {
+
         moneyValue.style.fontSize = "40px";
+
     } else if (digits < 13) {
+
         moneyValue.style.fontSize = "32px";
+
     } else {
+
         moneyValue.style.fontSize = "26px";
+
     }
 
     incomeDisplay.textContent =
@@ -355,13 +376,26 @@ function updateDisplay() {
 
 }
 
+
+// ===============================
+// SAVE GAME
+// ===============================
+
 function saveGame() {
 
-    localStorage.setItem("money", money);
+    localStorage.setItem(
+        "money",
+        money
+    );
 
     localStorage.setItem(
         "printerOwned",
         items.printer.owned
+    );
+
+    localStorage.setItem(
+        "coinCollectorOwned",
+        items.coinCollector.owned
     );
 
     localStorage.setItem(
@@ -371,16 +405,36 @@ function saveGame() {
 
 }
 
+
+// ===============================
+// LOAD GAME
+// ===============================
+
 function loadGame() {
 
     money =
-        Number(localStorage.getItem("money")) || 0;
+        Number(
+            localStorage.getItem("money")
+        ) || 0;
+
 
     items.printer.owned =
-        Number(localStorage.getItem("printerOwned")) || 0;
+        Number(
+            localStorage.getItem("printerOwned")
+        ) || 0;
+
+
+    items.coinCollector.owned =
+        Number(
+            localStorage.getItem("coinCollectorOwned")
+        ) || 0;
+
 
     let lastTime =
-        Number(localStorage.getItem("lastTime"));
+        Number(
+            localStorage.getItem("lastTime")
+        );
+
 
     if (lastTime) {
 
@@ -389,8 +443,10 @@ function loadGame() {
                 (Date.now() - lastTime) / 1000
             );
 
+
         let earned =
             secondsAway * calculateIncome();
+
 
         if (earned > 0) {
 
@@ -402,13 +458,25 @@ function loadGame() {
 
     }
 
+
     updateDisplay();
 
-    if (typeof updateShop === "function") {
-        updateShop();
+
+    if (typeof updatePrinterShop === "function") {
+
+        updatePrinterShop();
+
+    }
+
+
+    if (typeof updateCoinCollectorShop === "function") {
+
+        updateCoinCollectorShop();
+
     }
 
 }
+
 
 document.addEventListener(
     "visibilitychange",
@@ -423,6 +491,7 @@ document.addEventListener(
                     localStorage.getItem("lastTime")
                 );
 
+
             if (lastTime) {
 
                 let secondsAway =
@@ -430,8 +499,10 @@ document.addEventListener(
                         (Date.now() - lastTime) / 1000
                     );
 
+
                 let earned =
                     secondsAway * calculateIncome();
+
 
                 if (earned > 0) {
 
@@ -450,6 +521,7 @@ document.addEventListener(
     }
 );
 
+
 document.getElementById("dollar").onclick =
     function () {
 
@@ -459,39 +531,52 @@ document.getElementById("dollar").onclick =
 
     };
 
+
 setInterval(function(){
 
     money += calculateIncome();
 
     updateDisplay();
 
-},1000);
+}, 1000);
+
 
 const saveButton =
     document.getElementById("saveButton");
+
 
 saveButton.onclick = function () {
 
     saveGame();
 
+
     const saveMessage =
         document.getElementById("saveMessage");
+
 
     const saveProgress =
         document.getElementById("saveProgress");
 
+
     saveMessage.classList.add("show");
 
+
     saveProgress.style.transition = "none";
-    saveProgress.style.transform = "scaleX(1)";
+
+    saveProgress.style.transform =
+        "scaleX(1)";
+
 
     void saveProgress.offsetWidth;
+
 
     saveProgress.style.transition =
         "transform 2s linear";
 
+
     saveProgress.style.transform =
         "scaleX(0)";
+
 
     setTimeout(function () {
 
@@ -500,6 +585,7 @@ saveButton.onclick = function () {
     }, 2000);
 
 };
+
 
 let autoSaveTimer = null;
 let autoSaveNotificationTimer = null;
@@ -512,18 +598,24 @@ let autoSaveNotificationTimer = null;
 function startAutoSave() {
 
     if (autoSaveTimer !== null) {
+
         clearInterval(autoSaveTimer);
+
     }
 
-    autoSaveTimer = setInterval(function() {
 
-        if (autoSaveButton.classList.contains("on")) {
+    autoSaveTimer =
+        setInterval(function() {
 
-            saveGame();
+            if (
+                autoSaveButton.classList.contains("on")
+            ) {
 
-        }
+                saveGame();
 
-    }, 30000); // 30 seconds
+            }
+
+        }, 30000);
 
 }
 
@@ -535,76 +627,105 @@ function startAutoSave() {
 function startAutoSaveNotification() {
 
     if (autoSaveNotificationTimer !== null) {
-        clearInterval(autoSaveNotificationTimer);
+
+        clearInterval(
+            autoSaveNotificationTimer
+        );
+
     }
 
-    autoSaveNotificationTimer = setInterval(function() {
 
-        if (autoSaveButton.classList.contains("on")) {
+    autoSaveNotificationTimer =
+        setInterval(function() {
 
-            saveGame();
+            if (
+                autoSaveButton.classList.contains("on")
+            ) {
 
-            const saveMessage =
-                document.getElementById("saveMessage");
-
-            const saveMessageText =
-                document.getElementById("saveMessageText");
-
-            const saveProgress =
-                document.getElementById("saveProgress");
+                saveGame();
 
 
-            saveMessageText.innerHTML =
-                '<span class="pixelCheck"></span> GAME AUTO SAVED';
+                const saveMessage =
+                    document.getElementById(
+                        "saveMessage"
+                    );
 
 
-            saveMessage.classList.add("show");
+                const saveMessageText =
+                    document.getElementById(
+                        "saveMessageText"
+                    );
 
 
-            saveProgress.style.transition = "none";
-            saveProgress.style.transform = "scaleX(1)";
+                const saveProgress =
+                    document.getElementById(
+                        "saveProgress"
+                    );
 
-            void saveProgress.offsetWidth;
-
-
-            saveProgress.style.transition =
-                "transform 2s linear";
-
-            saveProgress.style.transform =
-                "scaleX(0)";
-
-
-            setTimeout(function() {
-
-                saveMessage.classList.remove("show");
 
                 saveMessageText.innerHTML =
-                    '<span class="pixelCheck"></span> GAME SAVED';
+                    '<span class="pixelCheck"></span> GAME AUTO SAVED';
 
-            }, 2000);
 
-        }
+                saveMessage.classList.add("show");
 
-    }, 300000); // 5 minutes
+
+                saveProgress.style.transition =
+                    "none";
+
+                saveProgress.style.transform =
+                    "scaleX(1)";
+
+
+                void saveProgress.offsetWidth;
+
+
+                saveProgress.style.transition =
+                    "transform 2s linear";
+
+
+                saveProgress.style.transform =
+                    "scaleX(0)";
+
+
+                setTimeout(function() {
+
+                    saveMessage.classList.remove(
+                        "show"
+                    );
+
+
+                    saveMessageText.innerHTML =
+                        '<span class="pixelCheck"></span> GAME SAVED';
+
+                }, 2000);
+
+            }
+
+        }, 300000);
 
 }
 
 
-// Start both systems
 startAutoSave();
 startAutoSaveNotification();
-    
+
+
 const deleteButton =
     document.getElementById("deleteButton");
+
 
 const deletePopup =
     document.getElementById("deletePopup");
 
+
 const cancelDelete =
     document.getElementById("cancelDelete");
 
+
 const confirmDelete =
     document.getElementById("confirmDelete");
+
 
 deleteButton.onclick = function () {
 
@@ -612,11 +733,13 @@ deleteButton.onclick = function () {
 
 };
 
+
 cancelDelete.onclick = function () {
 
     deletePopup.style.display = "none";
 
 };
+
 
 confirmDelete.onclick = function () {
 
@@ -626,22 +749,34 @@ confirmDelete.onclick = function () {
 
 };
 
+
 function showOfflinePopup(amount) {
 
     const popup =
-        document.getElementById("offlinePopup");
+        document.getElementById(
+            "offlinePopup"
+        );
+
 
     const text =
-        document.getElementById("offlineText");
+        document.getElementById(
+            "offlineText"
+        );
+
 
     const close =
-        document.getElementById("closeOffline");
+        document.getElementById(
+            "closeOffline"
+        );
+
 
     text.textContent =
         "While you were away, you earned $" +
         formatMoney(amount);
 
+
     popup.style.display = "flex";
+
 
     close.onclick = function () {
 
@@ -651,12 +786,15 @@ function showOfflinePopup(amount) {
 
 }
 
+
 autoSaveButton.onclick = function(){
 
-    if (autoSaveButton.classList.contains("on")) {
+    if (
+        autoSaveButton.classList.contains("on")
+    ) {
 
-        // Turn Auto Save OFF
         autoSaveButton.classList.remove("on");
+
 
         if (autoSaveTimer !== null) {
 
@@ -668,7 +806,6 @@ autoSaveButton.onclick = function(){
 
     } else {
 
-        // Turn Auto Save ON
         autoSaveButton.classList.add("on");
 
         startAutoSave();
@@ -677,8 +814,12 @@ autoSaveButton.onclick = function(){
 
 };
 
+
 const themeModeButton =
-    document.getElementById("themeModeButton");
+    document.getElementById(
+        "themeModeButton"
+    );
+
 
 themeModeButton.onclick = function () {
 
@@ -688,14 +829,22 @@ themeModeButton.onclick = function () {
 
 };
 
+
 const themeAutoButton =
-    document.getElementById("themeAutoButton");
+    document.getElementById(
+        "themeAutoButton"
+    );
+
 
 themeAutoButton.classList.add("on");
-    
+
+
 themeAutoButton.onclick = function () {
+
     this.classList.toggle("on");
+
 };
+
 </script>
 
 
