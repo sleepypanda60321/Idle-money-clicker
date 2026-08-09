@@ -13,8 +13,10 @@ function updateShop() {
         "Printer - $" +
         formatMoney(cost) +
         " (+$1/sec)";
-}
 
+    console.log("Printer cost:", cost);
+    console.log("Printer text:", printer.textContent);
+}
 printer.onclick = function() {
 
     alert("PRINTER CLICK DETECTED");
