@@ -571,22 +571,27 @@ function showOfflinePopup(amount) {
 
 }
 
-const autoSaveButton =
-    document.getElementById("autoSaveButton");
-
-// Auto Save is ON by default
-autoSaveButton.classList.add("on");
-
-
 autoSaveButton.onclick = function(){
 
     if (autoSaveButton.classList.contains("on")) {
 
+        // Turn Auto Save OFF
         autoSaveButton.classList.remove("on");
+
+        if (autoSaveTimer !== null) {
+
+            clearInterval(autoSaveTimer);
+
+            autoSaveTimer = null;
+
+        }
 
     } else {
 
+        // Turn Auto Save ON
         autoSaveButton.classList.add("on");
+
+        startAutoSave();
 
     }
 
