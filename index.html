@@ -520,6 +520,10 @@ function showOfflinePopup(amount) {
 const autoSaveButton =
     document.getElementById("autoSaveButton");
 
+// Auto Save is ON by default
+autoSaveButton.classList.add("on");
+
+
 autoSaveButton.onclick = function(){
 
     if (autoSaveButton.classList.contains("on")) {
