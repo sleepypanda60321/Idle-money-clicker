@@ -238,6 +238,22 @@ const items = {
 const moneyValue = document.getElementById("moneyValue");
 const incomeDisplay = document.getElementById("income");
 
+function calculateIncome() {
+
+    let totalIncome = 0;
+
+    for (const item in items) {
+
+        totalIncome +=
+            items[item].owned *
+            items[item].income;
+
+    }
+
+    return totalIncome;
+
+}
+    
 function formatMoney(num) {
 
     num = Math.floor(num);
@@ -292,8 +308,7 @@ if (digits < 7) {
 
 
     incomeDisplay.textContent =
-"+$" + formatMoney(income) + "/s";
-
+"+$" + formatMoney(calculateIncome()) + "/s";
     updateInventory();
     
 }
