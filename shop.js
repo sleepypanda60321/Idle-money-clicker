@@ -96,5 +96,14 @@ printer.onclick = function() {
 };
 
 
-updateShop();
+items.printer.owned++;
+
+updateDisplay();
+
+printer.textContent =
+    "Printer - $" +
+    formatMoney(getPrinterCost()) +
+    " (+$0.01/sec)";
+
+saveGame();
 loadGame();
