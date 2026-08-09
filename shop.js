@@ -44,5 +44,5 @@ updateShop();
 
 };
 
-
 updateShop();
+loadGame();
