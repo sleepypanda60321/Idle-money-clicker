@@ -17,17 +17,27 @@ html, body {
     text-shadow: 4px 4px #000;
     position: relative;
     z-index: 1;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
 }
 
 #moneyLabel {
     font-size: 48px;
+    flex-shrink: 0;
 }
 
 #moneyValue {
     font-size: 48px;
     transition: font-size 0.2s;
+    white-space: nowrap;
+    flex-shrink: 1;
+    min-width: 0;
 }
-
 #stats {
     position: relative;
 
