@@ -532,3 +532,71 @@ html, body {
 }
 
 
+#themeSetting,
+#themeModeSetting {
+    width: 90%;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 6px;
+
+    color: white;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#themeLabel,
+#themeModeLabel {
+    margin-right: auto;
+}
+
+#themeOffLabel,
+#themeLightLabel {
+    margin-right: 5px;
+}
+
+#themeOnLabel,
+#themeDarkLabel {
+    margin-left: 5px;
+}
+
+#themeAutoButton,
+#themeModeButton {
+    position: relative;
+
+    width: 58px;
+    height: 30px;
+
+    padding: 0;
+
+    background: #aa0000;
+    border: 3px solid white;
+
+    box-sizing: border-box;
+}
+
+#themeAutoKnob,
+#themeModeKnob {
+    position: absolute;
+
+    top: 3px;
+    left: 3px;
+
+    width: 18px;
+    height: 18px;
+
+    background: white;
+}
+
+#themeAutoButton.on,
+#themeModeButton.on {
+    background: #00aa00;
+}
+
+#themeAutoButton.on #themeAutoKnob,
+#themeModeButton.on #themeModeKnob {
+    left: 30.5px;
+}
