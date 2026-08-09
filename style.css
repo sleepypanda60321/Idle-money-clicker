@@ -240,6 +240,7 @@ html, body {
 }
 
 #autoClickerButton {
+    z-index: 9999;
     position: fixed;
     right: 20px;
     top: 55px;
