@@ -153,8 +153,8 @@ html, body {
 }
 
 
-#coinCollecter,
-#printer {
+#printer,
+#coinCollector {
     width: 95%;
     height: 70px;
     background: #444;
