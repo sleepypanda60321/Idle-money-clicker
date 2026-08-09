@@ -1,11 +1,8 @@
-const printer =
-    document.getElementById("printer");
+const printer = document.getElementById("printer");
 
 function getPrinterCost() {
-
     return items.printer.price +
-        (items.printer.owned * 5);
-
+           (items.printer.owned * 5);
 }
 
 function updateShop() {
@@ -16,15 +13,27 @@ function updateShop() {
         "Printer - $" +
         formatMoney(cost) +
         " (+$1/sec)";
-
 }
 
 printer.onclick = function() {
 
     alert("PRINTER CLICK DETECTED");
 
+    let cost = getPrinterCost();
+
+    if (money >= cost) {
+
+        money -= cost;
+
+        items.printer.owned++;
+
+        updateInventory();
+        updateDisplay();
+        updateShop();
+
+        saveGame();
+    }
+
 };
 
 updateShop();
-
-loadGame();
