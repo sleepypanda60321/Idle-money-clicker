@@ -262,7 +262,7 @@ html, body {
 
     box-sizing: border-box;
 
-    z-index: 999999;
+    z-index: 500;
 
     touch-action: manipulation;
 }
