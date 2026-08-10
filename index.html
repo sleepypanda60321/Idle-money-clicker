@@ -389,31 +389,59 @@ function updateDisplay() {
         "$" + formatMoney(money);
 
 
-    let digits =
-        Math.floor(money)
-        .toString()
-        .length;
+    // Start large
+    moneyValue.style.fontSize = "48px";
 
 
-    if (digits < 7) {
+    // Give the browser a moment to calculate
+    // the rendered width before checking it.
+    void moneyValue.offsetWidth;
 
-        moneyValue.style.fontSize =
-            "48px";
 
-    } else if (digits < 10) {
+    const availableWidth =
+        moneyValue.parentElement.clientWidth;
+
+
+    if (
+        moneyValue.scrollWidth >
+        availableWidth
+    ) {
 
         moneyValue.style.fontSize =
             "40px";
 
-    } else if (digits < 13) {
+    }
+
+
+    if (
+        moneyValue.scrollWidth >
+        availableWidth
+    ) {
 
         moneyValue.style.fontSize =
-            "32px";
+            "34px";
 
-    } else {
+    }
+
+
+    if (
+        moneyValue.scrollWidth >
+        availableWidth
+    ) {
 
         moneyValue.style.fontSize =
-            "26px";
+            "28px";
+
+    }
+
+
+    if (
+        moneyValue.scrollWidth >
+        availableWidth
+    ) {
+
+        moneyValue.style.fontSize =
+            "24px";
 
     }
 
