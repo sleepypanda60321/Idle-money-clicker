@@ -571,3 +571,117 @@ html, body {
     overflow-x: hidden;
     box-sizing: border-box;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   PC / LARGE SCREEN FIXES
+   ========================================= */
+
+@media (min-width: 601px) {
+
+    /*
+       Keep the main menu inside the visible
+       lower portion of the screen.
+    */
+    #menu {
+        top: 55%;
+        bottom: 0;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    /*
+       Tabs stay fixed while the content below
+       them gets the remaining space.
+    */
+    #tabs {
+        flex: 0 0 50px;
+        height: 50px;
+    }
+
+    /*
+       Give the content area a real height that
+       fits inside the menu.
+    */
+    #content {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    /*
+       The shop gets its own scrollbar instead
+       of pushing the rest of the page downward.
+    */
+    #shop {
+        height: 100%;
+        max-height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        box-sizing: border-box;
+        scrollbar-gutter: stable;
+    }
+
+    /*
+       Make Settings occupy the same area as
+       the menu instead of using its own height.
+    */
+    #settings {
+        top: 55%;
+        bottom: 0;
+        height: auto;
+        max-height: none;
+        overflow-y: auto;
+        overflow-x: hidden;
+        box-sizing: border-box;
+        scrollbar-gutter: stable;
+    }
+
+    /*
+       Prevent the money display from forcing
+       things off the right side of the screen.
+    */
+    #money {
+        max-width: calc(100vw - 20px);
+        overflow: hidden;
+    }
+
+    #moneyValue {
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    /*
+       Keep the dollar centered without letting
+       it become enormous on large monitors.
+    */
+    #dollar {
+        max-width: 180px;
+        max-height: 100px;
+    }
+
+    /*
+       Make shop buttons fit comfortably on PC.
+    */
+    #printer,
+    #coinCollector {
+        max-width: 95%;
+        box-sizing: border-box;
+    }
+
+}
