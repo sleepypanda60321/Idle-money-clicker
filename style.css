@@ -14,7 +14,7 @@ body {
 }
 
 /* ================================
-   MONEY DISPLAY
+   MONEY
    ================================ */
 
 #money {
@@ -48,7 +48,7 @@ body {
 }
 
 /* ================================
-   STATS / BACKPACK
+   STATS
    ================================ */
 
 #stats {
@@ -137,7 +137,6 @@ body {
     height: 100px;
 
     background: #3cb043;
-
     border: 8px solid #145214;
 
     display: flex;
@@ -672,7 +671,7 @@ body {
     margin-left: 5px;
 }
 
-/* All switches */
+/* Switches */
 
 #autoSaveButton,
 #themeAutoButton,
@@ -732,14 +731,16 @@ body {
     left: 30.5px;
 }
 
+
 /* =========================================================
    PC / LARGE SCREEN FIXES
-   These rules ONLY apply at 601px wide and above.
+   ONLY APPLIES TO 601px+ WIDTH
    ========================================================= */
 
 @media (min-width: 601px) {
 
-    /* Prevent long money values from pushing things sideways */
+    /* Prevent long money values from pushing the UI sideways */
+
     #money {
         max-width: calc(100vw - 20px);
         overflow: hidden;
@@ -750,7 +751,11 @@ body {
         overflow: hidden;
     }
 
-    /* Make the menu a proper vertical layout */
+
+    /* =========================
+       MAIN MENU
+       ========================= */
+
     #menu {
         top: 55%;
         bottom: 0;
@@ -763,21 +768,24 @@ body {
         min-height: 0;
     }
 
-    /* Tabs don't stretch */
     #tabs {
         flex: 0 0 50px;
         height: 50px;
     }
 
-    /* Content gets whatever space remains */
     #content {
         flex: 1;
+
         min-height: 0;
 
         overflow: hidden;
     }
 
-    /* Shop scrolls inside its own area */
+
+    /* =========================
+       SHOP
+       ========================= */
+
     #shop {
         height: 100%;
         max-height: 100%;
@@ -790,34 +798,63 @@ body {
         scrollbar-gutter: stable;
     }
 
-    /* Settings fits into the same area */
+    #printer,
+    #coinCollector {
+        max-width: 95%;
+        box-sizing: border-box;
+    }
+
+
+    /* =========================
+       SETTINGS
+       ========================= */
+
     #settings {
+        /*
+         * Settings fills exactly the lower
+         * portion of the screen.
+         */
         top: 55%;
         bottom: 0;
 
         height: auto;
         max-height: 45%;
 
+        padding: 10px;
+
+        box-sizing: border-box;
+
+        /*
+         * If the settings contents don't fit,
+         * Settings itself scrolls.
+         */
         overflow-y: auto;
         overflow-x: hidden;
 
-        box-sizing: border-box;
-
         scrollbar-gutter: stable;
-
-        padding: 10px;
     }
 
-    /* Keep shop buttons inside the available width */
-    #printer,
-    #coinCollector {
-        max-width: 95%;
-        box-sizing: border-box;
+    /*
+     * Slightly smaller PC buttons so the
+     * entire Settings interface fits better.
+     */
+    #saveButton,
+    #deleteButton {
+        height: 45px;
+        font-size: 20px;
+    }
+
+    #autoSaveSetting,
+    #themeSetting,
+    #themeModeSetting {
+        height: 34px;
+        margin-bottom: 2px;
     }
 }
 
+
 /* =========================================================
-   VERY SHORT SCREENS
+   VERY SHORT PC SCREENS
    ========================================================= */
 
 @media (min-width: 601px) and (max-height: 650px) {
@@ -836,25 +873,10 @@ body {
     }
 }
 
+
 /* =========================================================
-   UNSUPPORTED / VERY SMALL SCREEN WARNING
+   SCREEN SIZE WARNING
    ========================================================= */
-
-/*
-   Hidden by default.
-   This assumes you add an element to index.html with:
-
-   <div id="screenWarning">
-       <div id="screenWarningBox">
-           <strong>⚠ SCREEN SIZE WARNING</strong>
-           <p>
-               This screen size is not officially supported.
-               You can still play, but some elements may not
-               fit correctly.
-           </p>
-       </div>
-   </div>
-*/
 
 #screenWarning {
     display: none;
@@ -919,19 +941,21 @@ body {
     line-height: 1.4;
 }
 
-/*
-   Show warning on extremely narrow screens.
-*/
+
+/* Very narrow screens */
+
 @media (max-width: 350px) {
+
     #screenWarning {
         display: flex;
     }
 }
 
-/*
-   Show warning on very short screens.
-*/
+
+/* Very short screens */
+
 @media (min-width: 351px) and (max-height: 450px) {
+
     #screenWarning {
         display: flex;
     }
