@@ -9,6 +9,14 @@ html, body {
     touch-action: manipulation;
 }
 
+body {
+    position: relative;
+}
+
+/* ================================
+   MONEY DISPLAY
+   ================================ */
+
 #money {
     margin: 10px;
     color: white;
@@ -38,6 +46,11 @@ html, body {
     flex-shrink: 1;
     min-width: 0;
 }
+
+/* ================================
+   STATS / BACKPACK
+   ================================ */
+
 #stats {
     position: relative;
 
@@ -83,47 +96,80 @@ html, body {
     font-weight: bold;
     text-shadow: 3px 3px #000;
 }
+
+/* ================================
+   INVENTORY
+   ================================ */
+
 #inventory {
     display: none;
+
     position: fixed;
     top: 155px;
     left: 10px;
+
     background: #333;
     border: 5px solid white;
+
     padding: 10px;
+
     color: white;
     font-size: 22px;
+
     z-index: 200;
+
     box-sizing: border-box;
 }
 
+/* ================================
+   DOLLAR
+   ================================ */
+
 #dollar {
     position: absolute;
+
     top: 30%;
     left: 50%;
+
     transform: translate(-50%, -50%);
+
     width: 180px;
     height: 100px;
+
     background: #3cb043;
+
     border: 8px solid #145214;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     color: white;
+
     font-size: 70px;
     font-weight: bold;
+
     box-shadow: 8px 8px #000;
+
     user-select: none;
+
     z-index: 1;
 }
 
+/* ================================
+   MENU
+   ================================ */
+
 #menu {
     position: absolute;
+
     top: 55%;
     left: 0;
     right: 0;
     bottom: 0;
+
     border-top: 5px solid white;
+
     z-index: 1;
 }
 
@@ -134,47 +180,79 @@ html, body {
 
 .tab {
     flex: 1;
+
     background: #333;
     color: white;
+
     border: 2px solid white;
+
     font-family: monospace;
     font-size: 16px;
 }
 
 #content {
     text-align: center;
+
     color: white;
+
     font-size: 25px;
 }
 
+/* ================================
+   SHOP
+   ================================ */
+
 #shop {
     display: none;
-    padding: 10px;
-}
 
+    padding: 10px;
+
+    height: 100%;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    box-sizing: border-box;
+}
 
 #printer,
 #coinCollector {
     width: 95%;
     height: 70px;
+
     background: #444;
     color: white;
+
     border: 4px solid white;
+
     font-family: monospace;
     font-size: 22px;
+
     margin-bottom: 10px;
+
+    box-sizing: border-box;
 }
+
+/* ================================
+   SETTINGS
+   ================================ */
 
 #settings {
     display: none;
+
     color: white;
+
     position: absolute;
-    top:62.5%;
+
+    top: 62.5%;
     left: 0;
     right: 0;
     bottom: 0;
+
     padding: 10px;
+
     box-sizing: border-box;
+
     z-index: 2;
 }
 
@@ -182,9 +260,12 @@ html, body {
 #deleteButton {
     width: 90%;
     height: 50px;
+
     background: #444;
     color: white;
+
     border: 4px solid white;
+
     font-family: monospace;
     font-size: 22px;
 }
@@ -193,9 +274,12 @@ html, body {
 #confirmDelete {
     width: 90%;
     height: 60px;
+
     background: #444;
     color: white;
+
     border: 4px solid white;
+
     font-family: monospace;
     font-size: 22px;
 }
@@ -204,52 +288,87 @@ html, body {
     color: red;
 }
 
+/* ================================
+   OFFLINE POPUP
+   ================================ */
+
 #offlinePopup {
     display: none;
+
     position: fixed;
+
     top: 0;
     left: 0;
+
     width: 100%;
     height: 100%;
+
     background: rgba(0, 0, 0, 0.7);
+
     justify-content: center;
     align-items: center;
+
     z-index: 1000;
 }
 
 #offlineBox {
     position: relative;
+
     width: 300px;
+
     background: #333;
+
     border: 5px solid white;
+
     padding: 20px;
+
     color: white;
+
     text-align: center;
+
     box-sizing: border-box;
 }
 
 #closeOffline {
     position: absolute;
+
     top: 5px;
     right: 5px;
+
     background: #444;
     color: white;
+
     border: 3px solid white;
+
     font-size: 20px;
 }
 
+/* ================================
+   DELETE POPUP
+   ================================ */
+
 #deletePopup {
     display: none;
+
     position: fixed;
+
     top: 0;
     left: 0;
+
     width: 100%;
     height: 100%;
+
     background: rgba(0, 0, 0, 0.7);
+
     justify-content: center;
     align-items: center;
+
     z-index: 1100;
 }
+
+/* ================================
+   AUTO CLICKER
+   ================================ */
 
 #autoClickerButton {
     position: fixed;
@@ -263,6 +382,7 @@ html, body {
     padding: 0;
 
     background: white;
+
     border: 4px solid #aaa;
     border-radius: 50%;
 
@@ -281,9 +401,12 @@ html, body {
 
 .pixelCursor {
     position: relative;
+
     width: 20px;
     height: 28px;
+
     background: black;
+
     clip-path: polygon(
         0 0,
         100% 70%,
@@ -293,21 +416,31 @@ html, body {
         45% 72%,
         0 100%
     );
+
     display: block;
 }
 
 #autoClickerPanel {
     visibility: hidden;
+
     position: fixed;
+
     right: 20px;
     top: 135px;
+
     width: 220px;
+
     padding: 15px;
+
     background: white;
+
     border: 3px solid black;
     border-radius: 10px;
+
     text-align: center;
+
     z-index: 900;
+
     box-sizing: border-box;
 }
 
@@ -317,10 +450,15 @@ html, body {
 
 #autoClickerPanel button {
     display: block;
+
     width: 100%;
+
     margin-top: 10px;
+
     padding: 10px;
+
     font-size: 16px;
+
     box-sizing: border-box;
 }
 
@@ -334,12 +472,19 @@ html, body {
 
 #autoSpeedInput {
     width: 80px;
+
     padding: 7px;
+
     font-size: 16px;
+
     text-align: center;
+
     box-sizing: border-box;
 }
 
+/* ================================
+   SAVE MESSAGE
+   ================================ */
 
 #saveMessage {
     position: fixed;
@@ -427,13 +572,19 @@ html, body {
     transform: scaleX(1);
 }
 
+/* ================================
+   DELETE BUTTONS
+   ================================ */
 
 #deletePopup #cancelDelete,
 #deletePopup #confirmDelete {
     display: inline-block;
+
     width: 40%;
     height: 55px;
+
     margin-top: 10px;
+
     box-sizing: border-box;
 }
 
@@ -445,8 +596,6 @@ html, body {
     color: red;
 }
 
-
-
 #deleteButtons {
     display: flex;
     gap: 15px;
@@ -454,6 +603,7 @@ html, body {
 
 #deleteButtons button {
     flex: 1;
+
     width: auto;
     margin: 0;
 }
@@ -462,6 +612,9 @@ html, body {
     color: red;
 }
 
+/* ================================
+   SETTINGS SWITCHES
+   ================================ */
 
 #autoSaveSetting,
 #themeSetting,
@@ -475,27 +628,35 @@ html, body {
     margin-bottom: 3px;
 
     color: white;
+
     font-family: monospace;
     font-size: 14px;
     font-weight: bold;
 }
 
 /* Setting names */
+
 #autoSaveLabel,
 #themeLabel,
 #themeModeLabel {
     width: 220px;
+
     flex-shrink: 0;
+
     text-align: left;
 }
 
 /* Option labels */
+
 #autoSaveOffLabel,
 #themeOffLabel,
 #themeLightLabel {
     width: 45px;
+
     flex-shrink: 0;
+
     text-align: right;
+
     margin-right: 5px;
 }
 
@@ -503,12 +664,16 @@ html, body {
 #themeOnLabel,
 #themeDarkLabel {
     width: 45px;
+
     flex-shrink: 0;
+
     text-align: left;
+
     margin-left: 5px;
 }
 
 /* All switches */
+
 #autoSaveButton,
 #themeAutoButton,
 #themeModeButton {
@@ -527,6 +692,7 @@ html, body {
 }
 
 /* Auto Save colors */
+
 #autoSaveButton {
     background: #aa0000;
 }
@@ -535,13 +701,15 @@ html, body {
     background: #00aa00;
 }
 
-/* Theme switches stay neutral */
+/* Theme switches */
+
 #themeAutoButton,
 #themeModeButton {
     background: #888;
 }
 
 /* Knobs */
+
 #autoSaveKnob,
 #themeAutoKnob,
 #themeModeKnob {
@@ -557,105 +725,21 @@ html, body {
 }
 
 /* ON position */
+
 #autoSaveButton.on #autoSaveKnob,
 #themeAutoButton.on #themeAutoKnob,
 #themeModeButton.on #themeModeKnob {
     left: 30.5px;
 }
 
-
-
-#shop {
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    box-sizing: border-box;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* =========================================
+/* =========================================================
    PC / LARGE SCREEN FIXES
-   ========================================= */
+   These rules ONLY apply at 601px wide and above.
+   ========================================================= */
 
 @media (min-width: 601px) {
 
-    /*
-       Keep the main menu inside the visible
-       lower portion of the screen.
-    */
-    #menu {
-        top: 55%;
-        bottom: 0;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        min-height: 0;
-    }
-
-    /*
-       Tabs stay fixed while the content below
-       them gets the remaining space.
-    */
-    #tabs {
-        flex: 0 0 50px;
-        height: 50px;
-    }
-
-    /*
-       Give the content area a real height that
-       fits inside the menu.
-    */
-    #content {
-        flex: 1;
-        min-height: 0;
-        overflow: hidden;
-    }
-
-    /*
-       The shop gets its own scrollbar instead
-       of pushing the rest of the page downward.
-    */
-    #shop {
-        height: 100%;
-        max-height: 100%;
-        overflow-y: auto;
-        overflow-x: hidden;
-        box-sizing: border-box;
-        scrollbar-gutter: stable;
-    }
-
-    /*
-       Make Settings occupy the same area as
-       the menu instead of using its own height.
-    */
-    #settings {
-        top: 55%;
-        bottom: 0;
-        height: auto;
-        max-height: none;
-        overflow-y: auto;
-        overflow-x: hidden;
-        box-sizing: border-box;
-        scrollbar-gutter: stable;
-    }
-
-    /*
-       Prevent the money display from forcing
-       things off the right side of the screen.
-    */
+    /* Prevent long money values from pushing things sideways */
     #money {
         max-width: calc(100vw - 20px);
         overflow: hidden;
@@ -666,22 +750,189 @@ html, body {
         overflow: hidden;
     }
 
-    /*
-       Keep the dollar centered without letting
-       it become enormous on large monitors.
-    */
-    #dollar {
-        max-width: 180px;
-        max-height: 100px;
+    /* Make the menu a proper vertical layout */
+    #menu {
+        top: 55%;
+        bottom: 0;
+
+        height: auto;
+
+        display: flex;
+        flex-direction: column;
+
+        min-height: 0;
     }
 
-    /*
-       Make shop buttons fit comfortably on PC.
-    */
+    /* Tabs don't stretch */
+    #tabs {
+        flex: 0 0 50px;
+        height: 50px;
+    }
+
+    /* Content gets whatever space remains */
+    #content {
+        flex: 1;
+        min-height: 0;
+
+        overflow: hidden;
+    }
+
+    /* Shop scrolls inside its own area */
+    #shop {
+        height: 100%;
+        max-height: 100%;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        box-sizing: border-box;
+
+        scrollbar-gutter: stable;
+    }
+
+    /* Settings fits into the same area */
+    #settings {
+        top: 55%;
+        bottom: 0;
+
+        height: auto;
+        max-height: 45%;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        box-sizing: border-box;
+
+        scrollbar-gutter: stable;
+
+        padding: 10px;
+    }
+
+    /* Keep shop buttons inside the available width */
     #printer,
     #coinCollector {
         max-width: 95%;
         box-sizing: border-box;
     }
+}
 
+/* =========================================================
+   VERY SHORT SCREENS
+   ========================================================= */
+
+@media (min-width: 601px) and (max-height: 650px) {
+
+    #menu {
+        top: 50%;
+    }
+
+    #settings {
+        top: 50%;
+        max-height: 50%;
+    }
+
+    #dollar {
+        top: 25%;
+    }
+}
+
+/* =========================================================
+   UNSUPPORTED / VERY SMALL SCREEN WARNING
+   ========================================================= */
+
+/*
+   Hidden by default.
+   This assumes you add an element to index.html with:
+
+   <div id="screenWarning">
+       <div id="screenWarningBox">
+           <strong>⚠ SCREEN SIZE WARNING</strong>
+           <p>
+               This screen size is not officially supported.
+               You can still play, but some elements may not
+               fit correctly.
+           </p>
+       </div>
+   </div>
+*/
+
+#screenWarning {
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-top: 20px;
+
+    box-sizing: border-box;
+
+    z-index: 9999999;
+
+    pointer-events: none;
+}
+
+#screenWarningBox {
+    width: min(90%, 420px);
+
+    background: #333;
+
+    color: white;
+
+    border: 4px solid #ffcc00;
+
+    padding: 15px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    font-family: monospace;
+
+    box-shadow: 6px 6px #000;
+}
+
+#screenWarningBox strong {
+    display: block;
+
+    color: #ffcc00;
+
+    font-size: 20px;
+
+    margin-bottom: 10px;
+}
+
+#screenWarningBox p {
+    margin: 0;
+
+    font-size: 15px;
+
+    line-height: 1.4;
+}
+
+/*
+   Show warning on extremely narrow screens.
+*/
+@media (max-width: 350px) {
+    #screenWarning {
+        display: flex;
+    }
+}
+
+/*
+   Show warning on very short screens.
+*/
+@media (min-width: 351px) and (max-height: 450px) {
+    #screenWarning {
+        display: flex;
+    }
 }
