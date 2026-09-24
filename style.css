@@ -739,224 +739,27 @@ body {
 
 @media (min-width: 601px) {
 
-    /* Prevent long money values from pushing the UI sideways */
-
-    #money {
-        max-width: calc(100vw - 20px);
-        overflow: hidden;
-    }
-
-    #moneyValue {
-        min-width: 0;
-        overflow: hidden;
-    }
-
-
-    /* =========================
-       MAIN MENU
-       ========================= */
-
-    #menu {
-        top: 55%;
-        bottom: 0;
-
-        height: auto;
-
-        display: flex;
-        flex-direction: column;
-
-        min-height: 0;
-    }
-
-    #tabs {
-        flex: 0 0 50px;
-        height: 50px;
-    }
-
-    #content {
-        flex: 1;
-
-        min-height: 0;
-
-        overflow: hidden;
-    }
-
-
-    /* =========================
-       SHOP
-       ========================= */
-
-    #shop {
-        height: 100%;
-        max-height: 100%;
-
-        overflow-y: auto;
-        overflow-x: hidden;
-
-        box-sizing: border-box;
-
-        scrollbar-gutter: stable;
-    }
-
-    #printer,
-    #coinCollector {
-        max-width: 95%;
-        box-sizing: border-box;
-    }
-
-
-    /* =========================
-       SETTINGS
-       ========================= */
-
     #settings {
-        /*
-         * Settings fills exactly the lower
-         * portion of the screen.
-         */
+        position: fixed;
+
         top: 55%;
+        left: 0;
+        right: 0;
         bottom: 0;
 
-        height: auto;
-        max-height: 45%;
+        width: 100%;
+        height: 45%;
 
         padding: 10px;
 
         box-sizing: border-box;
 
-        /*
-         * If the settings contents don't fit,
-         * Settings itself scrolls.
-         */
         overflow-y: auto;
         overflow-x: hidden;
 
         scrollbar-gutter: stable;
+
+        z-index: 2;
     }
 
-    /*
-     * Slightly smaller PC buttons so the
-     * entire Settings interface fits better.
-     */
-    #saveButton,
-    #deleteButton {
-        height: 45px;
-        font-size: 20px;
-    }
-
-    #autoSaveSetting,
-    #themeSetting,
-    #themeModeSetting {
-        height: 34px;
-        margin-bottom: 2px;
-    }
-}
-
-
-/* =========================================================
-   VERY SHORT PC SCREENS
-   ========================================================= */
-
-@media (min-width: 601px) and (max-height: 650px) {
-
-    #menu {
-        top: 50%;
-    }
-
-    #settings {
-        top: 50%;
-        max-height: 50%;
-    }
-
-    #dollar {
-        top: 25%;
-    }
-}
-
-
-/* =========================================================
-   SCREEN SIZE WARNING
-   ========================================================= */
-
-#screenWarning {
-    display: none;
-
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background: rgba(0, 0, 0, 0.72);
-
-    justify-content: center;
-    align-items: flex-start;
-
-    padding-top: 20px;
-
-    box-sizing: border-box;
-
-    z-index: 9999999;
-
-    pointer-events: none;
-}
-
-#screenWarningBox {
-    width: min(90%, 420px);
-
-    background: #333;
-
-    color: white;
-
-    border: 4px solid #ffcc00;
-
-    padding: 15px;
-
-    box-sizing: border-box;
-
-    text-align: center;
-
-    font-family: monospace;
-
-    box-shadow: 6px 6px #000;
-}
-
-#screenWarningBox strong {
-    display: block;
-
-    color: #ffcc00;
-
-    font-size: 20px;
-
-    margin-bottom: 10px;
-}
-
-#screenWarningBox p {
-    margin: 0;
-
-    font-size: 15px;
-
-    line-height: 1.4;
-}
-
-
-/* Very narrow screens */
-
-@media (max-width: 350px) {
-
-    #screenWarning {
-        display: flex;
-    }
-}
-
-
-/* Very short screens */
-
-@media (min-width: 351px) and (max-height: 450px) {
-
-    #screenWarning {
-        display: flex;
-    }
 }
